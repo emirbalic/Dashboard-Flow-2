@@ -1,0 +1,220 @@
+.button {
+    padding: 16px 24px;
+    font-size: 20px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: inherit;
+  line-height: 1;
+  border-radius: 30px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-brand-action-1;
+    border-color: $color-brand-action-1;
+  }
+
+  &.is-primary {
+    background-color: $color-brand-1;
+    border-color: $color-brand-1;
+    color: $color-white;
+    border-radius: 5px;
+  }
+
+  &.is-cancel {
+    background-color: $color-4;
+    border-color: $color-4;
+    color: $color-text;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-g-4;
+      border-color: $color-g-4;
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// add when adding filters to the frontend
+.filters{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  top: 10px;
+
+  .filter-wrapper{
+    position: relative;
+    p{
+      position: absolute;
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      color: #313F57;
+      top: -35px;
+      left: 15px;
+    }
+    
+    // input::-webkit-outer-spin-button,
+    // input::-webkit-inner-spin-button {
+    //     -webkit-appearance: none;
+    //     margin: 0;
+    // }
+    // .icon{
+    //   position: absolute;
+    //   top: 10px;
+    //   right: 26px;
+    // }
+  }
+  input,
+  select{
+    min-width: 260px;
+    margin-right: 20px;
+    border: 1px solid #E4E3E1;
+    border-radius: 5px;
+    padding: 10px 25px 10px 15px;
+    max-height: 40px;
+
+    font-family: 'IBM Plex Sans' !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    // border-color: red;
+    
+    &:focus{
+      outline: none;
+    }
+    // -moz-appearance: none;
+    // -webkit-appearance: none;
+    // .upper {
+    //   padding-top: 1px;
+    // }
+  }
+  // select::-ms-expand {
+  //   display: none;
+  // }
+
+//   .attach_input {
+//     padding-right: 40px !important;
+//     // margin-right: 0px !important;
+//     min-width: 160px;
+//     border-radius: 5px;// 0 0 10px !important;
+//     // height: 3.5rem;
+// }
+  
+  // .attach_button {
+  //   margin-left: -20px;
+  //   margin-right: 20px;
+  //   border: none;
+  //   color: white;
+  //   background-color: $color-brand-1;
+  //   border-radius: 0 5px 5px 0;
+  //   width: 60px;
+  //   height: 40px;
+
+  //   // .btn-icon{
+  //   //   vertical-align: 1px;
+  //   // }
+
+  //   &:hover {
+  //       background-color: $color-brand-action-1;
+  //       border-color: $color-brand-action-1;
+  //   }
+  // }
+  
+  .refresh_button {
+    min-width: 260px;
+    margin-right: 20px;
+    border: none;
+    color: white;
+    background-color: $color-brand-1;
+    border-radius: 5px;
+    width: 60px;
+    height: 40px;
+
+    &:hover {
+        background-color: $color-brand-action-1;
+        border-color: $color-brand-action-1;
+    }
+  }
+
+  .is-primary{
+    padding: 8px 15px !important;
+  }
+}
+
+
+
+
+table {
+  width: 100%;
+  border: 1px solid #e4e3e1;
+
+  thead {
+    tr {
+      text-align: left;
+      background-color: #e4e3e1;
+    }
+    th {
+      font-family: 'IBM Plex Sans';
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 20px;
+      padding: 6px;
+    }
+    .left {
+      text-align: left;
+    }
+    .right {
+      text-align: right;
+    }
+  }
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: #313f57;
+    border: 2px solid #313f57;
+  }
+
+  tbody {
+    tr {
+      background-color: #fff;
+    }
+
+    td {
+      font-family: 'IBM Plex Sans';
+      font-weight: 400;
+      font-size: 12px;
+      padding: 10px 8px !important;
+
+     
+    }
+
+    tr:nth-child(even) {
+      background-color: #f3f2ef;
+    }
+
+    tr:hover {
+      background-color: #b5bcc2;
+      cursor: pointer;
+    }
+  }
+}
+
+.table_icon {
+  height: 20px;
+}
+
+

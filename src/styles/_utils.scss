@@ -1,0 +1,50 @@
+@mixin flex-v {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @mixin flex-h {
+    display: flex;
+    flex-direction: row;
+  }
+
+  @mixin not-last-child {
+    > *:not(:last-child) {
+      @content;
+    }
+  }
+
+  @mixin full-abs {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @mixin box() {
+    background-color: $color-white;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  @mixin hide-scrollbar {
+    &:-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  @mixin is-s {
+    @media (max-width: 720px) {
+      @content;
+    }
+  }
+  
+  @mixin is-xl {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
