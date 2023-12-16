@@ -1,11 +1,21 @@
 import { reactive, watch } from "vue";
 import { ILocalStorage } from "@/models/ILocalStorage";
 import { ILoginData } from "@/models/ILoginData";
+import dlv from 'dlv';
 
 const store = reactive<ILocalStorage>({
     logged: null,
 });
 
+export const subscribe = (key: string, callback: Function) => {
+    watch(
+      // @ts-ignore
+      () => store[key],
+      (keyValue) => {
+        callback(keyValue);
+      }
+    );
+  };
 
 export const save = (key: string, update: ILoginData) =>
   new Promise((resolve:Function): void => {
@@ -18,6 +28,29 @@ export const save = (key: string, update: ILoginData) =>
     resolve();
   });
 
+  export const get = (path: string) => dlv(store, path);
+
+
+// export const get = (path: string) => {
+//     console.log('in get ------------------ >', dlv(store, path));
+//     console.log('in get store------------------ >', store);
+//     dlv(store, path);
+//   }
+
+// @ts-ignore
+export const load = (key: string) =>
+  new Promise((resolve) => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key)!)[key];
+      set(key, value);
+    //   console.log('key', key);
+    //   console.log('value', value);
+      
+      resolve(get(key));
+    } catch (e) {
+      resolve(get(key));
+    }
+  });
 
 
   export const remove = (key: string) =>

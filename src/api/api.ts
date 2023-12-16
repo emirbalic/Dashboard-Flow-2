@@ -1,5 +1,9 @@
 import axios , { Axios, AxiosResponse } from 'axios';//AxiosError, 
 
+
+import { subscribe } from '@/localStorage';
+import { ILoginData } from '@/models/ILoginData';
+
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const axiosInstance = axios.create();
@@ -16,8 +20,22 @@ const api = (axios: Axios) => {
         //   'Bearer ' + auth.access_token;
         //   // this is temporarily going to be changed to /rule_management/ until clear what to do with previus actionlist
         //   // axios.defaults.baseURL = baseUrl + '/rule_management/';
-          axios.defaults.baseURL = baseUrl + '/api/';
-    //   }
+        //   }
+        // });
+        axios.defaults.baseURL = baseUrl + '/api/';
+
+    // subscribe('loginData', (loginData: ILoginData) => {
+    //   // console.log('in API SUBSCRIBE login data >>> ', loginData['access_token']);
+    //   console.log('IN SUBSCRIBE  >>> ');
+
+
+    //   if (loginData) {
+    //       axios.defaults.headers.common['Authorization'] =
+    //       'Bearer ' + loginData.access_token;
+    //       // 'Bearer ' + loginData['access_token'];
+    //       axios.defaults.baseURL = baseUrl + '/api/';
+    //             // 
+    //         }
     // });
     
   

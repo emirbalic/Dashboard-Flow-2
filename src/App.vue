@@ -1,20 +1,38 @@
 <template>
+<!-- Logged:: {{ isLoggedIn }} -->
 
-   <!-- <router-view v-if="isLoggedIn"></router-view>
-    <login-view v-else></login-view> -->
-    <login-view />
+   <router-view v-if="isLoggedIn"></router-view>
+    <login-view v-else></login-view>
 
-  <!-- <router-view /> -->
+
+    <!-- <login-view />
+
+  <router-view /> -->
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
 import LoginView from '@/views/user/LoginView.vue';
+import { get as getFromStore, load as loadFromStore } from '@/localStorage';
 
 export default defineComponent({
   components: {
     LoginView
   },
+  setup() {
+    const isLoggedIn = computed(() => Boolean(getFromStore('logged')));
+
+    loadFromStore('logged')
+    // .then((_) => {
+    //   // isAuthLoading.value = false;
+    // });
+
+    return{
+      isLoggedIn
+    }
+
+  }
+
 
 
 })
