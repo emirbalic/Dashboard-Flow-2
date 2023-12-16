@@ -19,6 +19,7 @@ const api = (axios: Axios) => {
           axios.defaults.baseURL = baseUrl + '/api/';
     //   }
     // });
+    
   
     axios.interceptors.response.use(
       function (response: AxiosResponse)  {
