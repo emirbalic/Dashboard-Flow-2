@@ -1,51 +1,32 @@
-import axios , { Axios, AxiosResponse } from 'axios';//AxiosError, 
+import axios, { Axios, AxiosResponse } from "axios"; //AxiosError,
 
+import { authorize } from "@/localStorage";
+import { ILoginData } from "@/models/ILoginData";
 
-import { subscribe } from '@/localStorage';
-import { ILoginData } from '@/models/ILoginData';
-
-axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const axiosInstance = axios.create();
 
-const baseUrl = 'http://localhost:8000'
+const baseUrl = process.env.VUE_APP_API_URL;
 
 const api = (axios: Axios) => {
-  
-    // const controller = new AbortController();
-    // subscribe('auth', (auth: IAuth) => {
-  
-    //   if (auth) {
-        //   axios.defaults.headers.common['Authorization'] =
-        //   'Bearer ' + auth.access_token;
-        //   // this is temporarily going to be changed to /rule_management/ until clear what to do with previus actionlist
-        //   // axios.defaults.baseURL = baseUrl + '/rule_management/';
-        //   }
-        // });
-        axios.defaults.baseURL = baseUrl + '/api/';
+  // === add in UX part
+  const controller = new AbortController();
 
-    // subscribe('loginData', (loginData: ILoginData) => {
-    //   // console.log('in API SUBSCRIBE login data >>> ', loginData['access_token']);
-    //   console.log('IN SUBSCRIBE  >>> ');
+  authorize("logged", (loginData: ILoginData) => {
+    if (loginData) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + loginData.access_token;
+      axios.defaults.baseURL = baseUrl + "/api/";
+    }
+  });
 
-
-    //   if (loginData) {
-    //       axios.defaults.headers.common['Authorization'] =
-    //       'Bearer ' + loginData.access_token;
-    //       // 'Bearer ' + loginData['access_token'];
-    //       axios.defaults.baseURL = baseUrl + '/api/';
-    //             // 
-    //         }
-    // });
-    
-  
-    axios.interceptors.response.use(
-      function (response: AxiosResponse)  {
-        return response;
-      },
+  axios.interceptors.response.use(
+    function (response: AxiosResponse) {
+      return response;
+    }
 
     //   function (error: AxiosError) {
-  
+
     //     if (error.message === 'Network Error' && !error.response) {
     //       showNotice({
     //         props: {
@@ -54,16 +35,16 @@ const api = (axios: Axios) => {
     //           message: 'Network error - API not responsive',
     //         },
     //       });
-    //     } else 
-        
+    //     } else
+
     //     if (error.response!.status === 401) {
-          
+
     //       handleUnauthorizedServerResponse();
-  
+
     //     } else if (error.response!.status === 400) {
-          
+
     //       reject()
-  
+
     //     } else if (error.response!.status === 406) {
     //       /**
     //        * Not bloody likely to happen but to be kept here temporarily
@@ -74,33 +55,35 @@ const api = (axios: Axios) => {
     //     }
     //     return Promise.reject(error);
     //   }
-    );
-  
-    // const cancelRequests = () => {
-    //     console.log("Canceling API requests");
-    //     controller.abort();
-    // }
-  
-    return {
-      get: <T>(url: string , config: any) =>
-        axios.get<T>(url, {...config}),
-      post: <T>(url: string, body: object) =>//, config: any
-        axios.post<T>(url, body),//, { signal: controller.signal, ...config }
-      put: <T>(url: string, body: object) =>//, config: any
-        axios.put<T>(url, body),//, { signal: controller.signal, ...config }
-      patch: (url: string, body: object) =>//, config: any
-        axios.patch(url, body),//, { signal: controller.signal, ...config }
-      delete: <T>(url: string) =>//, config: any
-        axios.delete<T>(url),//, { signal: controller.signal, ...config }
-      // cancel:() => cancelRequests(),
-    };
+  );
+
+  // const cancelRequests = () => {
+  //     console.log("Canceling API requests");
+  //     controller.abort();
+  // }
+
+  return {
+    get: <T>(url: string, config: any) => axios.get<T>(url, { ...config }),
+    post: <T>(
+      url: string,
+      body: object //, config: any
+    ) => axios.post<T>(url, body), //, { signal: controller.signal, ...config }
+    put: <T>(
+      url: string,
+      body: object //, config: any
+    ) => axios.put<T>(url, body), //, { signal: controller.signal, ...config }
+    patch: (
+      url: string,
+      body: object //, config: any
+    ) => axios.patch(url, body), //, { signal: controller.signal, ...config }
+    delete: <T>(
+      url: string //, config: any
+    ) => axios.delete<T>(url), //, { signal: controller.signal, ...config }
+    // cancel:() => cancelRequests(),
   };
+};
 
-  export default api(axiosInstance);
+export default api(axiosInstance);
 
-
-  // get: <T>(url: string ) =>//, config: any
-  // axios.get<T>(url),//, { signal: controller.signal, ...config }
-
-
- 
+// get: <T>(url: string ) =>//, config: any
+// axios.get<T>(url),//, { signal: controller.signal, ...config }

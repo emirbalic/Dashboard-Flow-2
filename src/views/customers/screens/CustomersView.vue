@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 // import dayjs from 'dayjs';
 import { loadCustomers } from '@/api/customers';
@@ -82,7 +82,7 @@ export default defineComponent({
         const store = useStore();
         const customers = ref();
 
-        const getOrders = async () => {
+        const getCustomers = async () => {
 
 
             // this is just because of pagination, originaly do the one line only
@@ -113,8 +113,9 @@ export default defineComponent({
             // isDeleteModalVisible.value = true;
             // ruleRecordIdToDelete.value = id;
         };
-
-        getOrders();
+        onMounted(() => {
+            getCustomers();
+        })
 
         return {
             customers,

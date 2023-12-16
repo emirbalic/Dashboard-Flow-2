@@ -7,7 +7,8 @@ const store = reactive<ILocalStorage>({
     logged: null,
 });
 
-export const subscribe = (key: string, callback: Function) => {
+export const authorize = (key: string, callback: Function) => {
+    console.log(' authorize ');
     watch(
       // @ts-ignore
       () => store[key],
@@ -19,7 +20,7 @@ export const subscribe = (key: string, callback: Function) => {
 
 export const save = (key: string, update: ILoginData) =>
   new Promise((resolve:Function): void => {
-    // console.log(' store before', store);
+    
     localStorage.setItem(key, JSON.stringify({ [key]: update }));
     // console.log(' store after', store);
     //@ts-ignore

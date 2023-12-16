@@ -1,5 +1,5 @@
 <template>
-<!-- Logged:: {{ isLoggedIn }} -->
+Logged:: {{ isLoggedIn }}
 
    <router-view v-if="isLoggedIn"></router-view>
     <login-view v-else></login-view>
@@ -20,9 +20,11 @@ export default defineComponent({
     LoginView
   },
   setup() {
-    const isLoggedIn = computed(() => Boolean(getFromStore('logged')));
 
+    const isLoggedIn = computed(() => Boolean(getFromStore('logged')));
+    console.log(' App.vue ', isLoggedIn.value);
     loadFromStore('logged')
+
     // .then((_) => {
     //   // isAuthLoading.value = false;
     // });

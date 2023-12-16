@@ -496,15 +496,10 @@ export default defineComponent({
 
 
 
-    onBeforeMount(() => {
-      // console.log(`the component is still not mounted.`)
+    onMounted(() => {
       updateList()
-      
-      // getNumberOfPages()
-
       getCities()
       getCountries()
-
     })
 
     // updateList()
