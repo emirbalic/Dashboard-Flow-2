@@ -174,7 +174,44 @@
           }
         }
       }
+      // ADD IN LOGOUT LESSON
+      .bottom-nav{
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        > a {
+          @include flex-h;
+          align-items: center;
+          justify-content: flex-start;
+          height: 40px;
+          // width: 220px;
+          margin: 1px 10px;
+          padding: 24px 0 24px 10px;
+          font-size: 18px;
+          font-family:'IBM Plex Sans';
+          position: relative;
+          border-radius: 7px;
+          
+          > span {
+            min-width: 144px;
+            max-width: 144px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* number of lines to show */
+                    line-clamp: 2; 
+            -webkit-box-orient: vertical;
+          }
+
+          > .nav_icon {
+            height: 25px;
+              padding-right: 25px;
+          }
+
+          &:not(.is-toggled):hover {
+            background-color: #4A566B;
+          }
+        }
+      }
     }
+    
   }
   > .body {
     h3 {
@@ -248,22 +285,22 @@
           }
         }
 
-        > .options {
-          @include flex-h;
-          align-items: center;
-          padding-right: 40px;
+        // > .options {
+        //   @include flex-h;
+        //   align-items: center;
+        //   padding-right: 40px;
 
-          > .data-filters {
-            @include flex-h;
-            align-items: center;
-            // @include not-last-child {
-            //   margin-right: 32px;
-            // }
-            .button {
-              font-size: 14px;
-            }
-          }
-        }
+        //   > .data-filters {
+        //     @include flex-h;
+        //     align-items: center;
+        //     // @include not-last-child {
+        //     //   margin-right: 32px;
+        //     // }
+        //     .button {
+        //       font-size: 14px;
+        //     }
+        //   }
+        // }
       }
     }
   }

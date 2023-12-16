@@ -1,5 +1,5 @@
 <template>
-Logged:: {{ isLoggedIn }}
+<!-- Logged:: {{ isLoggedIn }} -->
 
    <router-view v-if="isLoggedIn"></router-view>
     <login-view v-else></login-view>
