@@ -1,4 +1,5 @@
 .button {
+    // padding: 160px 240px;
     padding: 16px 24px;
     font-size: 20px;
   background-color: transparent;
@@ -7,11 +8,7 @@
   line-height: 1;
   border-radius: 30px;
 
-  &:hover {
-    cursor: pointer;
-    background-color: $color-brand-action-1;
-    border-color: $color-brand-action-1;
-  }
+ 
 
   &.is-primary {
     background-color: $color-brand-1;
@@ -26,18 +23,26 @@
     color: $color-text;
     border-radius: 5px;
 
-    &:hover {
-      background-color: $color-g-4;
-      border-color: $color-g-4;
-    }
+    // &:hover {
+    //   // background-color: $color-g-4;
+    //   // border-color: $color-g-4;
+    //   background-color: $color-brand-action-1;
+    //     border-color: $color-brand-action-1;
+    // }
   }
-
   &[disabled] {
     opacity: 0.6;
     &:hover {
       cursor: not-allowed;
     }
   }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-brand-action-1;
+    border-color: $color-brand-action-1;
+  }
+
 }
 
 // add when adding filters to the frontend
@@ -140,6 +145,7 @@
     height: 40px;
 
     &:hover {
+      cursor: pointer;
         background-color: $color-brand-action-1;
         border-color: $color-brand-action-1;
     }

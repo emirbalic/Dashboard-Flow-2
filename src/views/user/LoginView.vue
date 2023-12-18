@@ -1,39 +1,51 @@
 <template>
-  <div>
-    <h1>This is login view</h1>
-    <button class="button is-primary" @click="login">
-      Login
-    </button>
-    <button  class="button is-cancel" @click="cleanStorage">
-            Clear storage
-          </button>
+  <div class="login">
+    <form @submit.prevent="login" autocomplete="off">
+      <p class="login-title">Order management reporting</p>
+      <div class="input">
+        <label for="login_username">Username</label>
+        <input type="text" placeholder="Username..." id="login_username" v-model="input.username" />
+      </div>
+      <div class="input">
+        <label for="login_password">Password</label>
+        <input type="password" placeholder="Password..." id="login_password" v-model="input.password" />
+      </div>
+      <button type="submit" class="button is-primary" :disabled="!isValid">
+        Login
+      </button>
+    </form>
   </div>
 </template>
     
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { authenticate } from '@/api/authenicate';
 import { ILoginCredentials } from '@/models/IUtilModels'
 
 import { save as saveToStore } from '@/localStorage';
-import { remove as removeFromoStore } from '@/localStorage';
 
 export default defineComponent({
   components: {
   },
   setup() {
 
+    const input = ref({
+      username: '',
+      password: '',
+    });
 
-    const cleanStorage = () => {
-      const clean =  removeFromoStore('logged')
-    }
+    const isValid = computed(() => {
+      return Object.values(input.value).every(Boolean);
+    });
 
     const login = async () => {
       console.info(' logging triggered !!!!')
+      const { username, password } = input.value;
+
 
       const body: ILoginCredentials = {
-        username: "admin",
-        password: "Pa$$w0rd",
+        username,
+        password,
       }
       const response = await authenticate(body);
 
@@ -50,9 +62,77 @@ export default defineComponent({
       }
     };
     return {
-      cleanStorage,
+      input,
+      isValid,
       login,
     };
   },
 });
 </script>
+
+<style lang="scss">
+
+.login {
+  background-image: url('../../assets/login_background.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+
+  @include flex-v;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  >form {
+    margin: 0 10% ;//!important
+    padding: 30px 60px 80px;
+    min-width: 480px;
+    max-width: 480px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    
+    .login-title {
+      margin: 10px auto 20px;
+      color: #fff;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .input {
+      @include flex-v;
+
+      >label {
+        margin-bottom: 2px;
+        font-size: 22px;
+        color: #fff;
+      }
+
+      >input {
+        border-radius: 8px;
+        max-width: 440px;
+        border: 1px solid #fff;
+        color: gray;
+        width: 100%;
+        padding: 16px;
+      }
+      // >button {
+      //   max-width: fit-content;
+      // }
+    }
+
+    @include flex-v;
+
+    @include not-last-child {
+      margin-bottom: 24px;
+    }
+
+    >.button {
+      padding: 16px 24px;
+    }
+  }
+}
+</style>

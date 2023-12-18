@@ -15,9 +15,9 @@
   </script>
   
   <style scoped>
-  .modal {
-    z-index: 10000;
-  }
+  /* .modal {
+    z-index: 1000000;
+  } */
   </style>
   
   

@@ -372,9 +372,9 @@ export default defineComponent({
       line-height: 16px;
       color: #2d4059;
 
-      span {
-        opacity: 0.6;
-      }
+      // span {
+      //   opacity: 0.6;
+      // }
 
       select {
         margin-top: -10px;
