@@ -19,14 +19,16 @@
     
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { authenticate } from '@/api/authenicate';
+import { authenticate } from '@/api/users';
 import { ILoginCredentials } from '@/models/IUtilModels'
+
+import router from '@/router';
 
 import { save as saveToStore } from '@/localStorage';
 
 export default defineComponent({
-  components: {
-  },
+  // components: {
+  // },
   setup() {
 
     const input = ref({
@@ -57,8 +59,13 @@ export default defineComponent({
           username: response.data.username,
           isAdmin: response.data.is_admin,
           access_token: response.data.access,
+          refresh_token: response.data.refresh,
           requiresReset: response.data.requires_reset,
         });
+        //++
+        router.push({
+                name: 'orders',
+            });
       }
     };
     return {
@@ -136,3 +143,4 @@ export default defineComponent({
   }
 }
 </style>
+@/api/users

@@ -101,7 +101,7 @@ import { useRoute } from 'vue-router';
 //     get as getFromStore,
 // } from '@/services/store';
 
-import api from '../api/api';
+// import api from '../api/api';
 // import Config_Icon from '@/components/icons/Config_Icon.vue';
 // import Settings_Icon from '@/components/icons/Settings_Icon.vue';
 // import Logout_Icon from '@/components/icons/Logout_Icon.vue';
@@ -139,7 +139,7 @@ export default defineComponent({
             removeFromStore('logged');
             //   api.cancel();
             router.push({
-                name: 'orders',
+                name: 'login',
             });
         };
         const route = useRoute();

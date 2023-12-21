@@ -8,7 +8,7 @@ const store = reactive<ILocalStorage>({
 });
 
 export const authorize = (key: string, callback: Function) => {
-    console.log(' authorize ');
+    // console.log(' authorize ');
     watch(
       // @ts-ignore
       () => store[key],

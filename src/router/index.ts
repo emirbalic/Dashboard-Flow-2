@@ -10,6 +10,10 @@ import SuppliersView from '@/views/reporting/screens/SuppliersView.vue'
 import ProductsView from '@/views/reporting/screens/ProductsView.vue'
 import CustomersView from '@/views/customers/screens/CustomersView.vue';
 
+import { get as getFromStore } from '@/localStorage';
+import LoginView from '@/views/user/LoginView.vue'
+
+
 const routes: Array<RouteRecordRaw> = [
   
   {
@@ -17,13 +21,14 @@ const routes: Array<RouteRecordRaw> = [
     component: MainView,
     name: 'mainview',
     redirect: '/default',
+    
     children: [
       {
         path: '/default',
         name: 'default',
         component: Default,
         props: {},
-        // meta: { product: 'dashboard' },
+        // // meta: { product: 'dashboard' },
         // beforeEnter: (to: any, from: any, next: any) => {
         //   const isAdmin = getFromStore('auth.isAdmin');
         //   if (isAdmin) {
@@ -37,10 +42,10 @@ const routes: Array<RouteRecordRaw> = [
         name: 'orders',
         component: OrdersView,
         props: {},
-        // meta: { product: 'dashboard' },
+        // // meta: { product: 'dashboard' },
         // beforeEnter: (to: any, from: any, next: any) => {
-        //   const isAdmin = getFromStore('auth.isAdmin');
-        //   if (isAdmin) {
+        //   const isLogged = Boolean(getFromStore('logged'));
+        //   if (isLogged) {
         //     next();
         //   } else {
         //   }
@@ -82,12 +87,35 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/login',
+    component: LoginView,
+    name: 'login',
+    // props: {},
+    // children: []
+  }
 
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach(async (to, from) => {
+  const isLogged = Boolean(getFromStore('logged'));
+  // console.log('is logged', isLogged);
+  
+  if (
+    // make sure the user is authenticated
+    !isLogged &&
+    // ❗️ Avoid an infinite redirect
+    to.name !== 'login'
+  ) 
+  {
+    // redirect the user to the login page
+    return { name: 'login' }
+  }
 })
 
 export default router
