@@ -88,7 +88,7 @@
                                 :class="{ 'router-link-exact-active': checkURL('users-overview') }" class="each">
                                 Users overview
                             </router-link>
-                            <router-link :to="{ name: 'user-settings' }"
+                            <router-link v-if="!isAdmin" :to="{ name: 'user-settings' }"
                                 :class="{ 'router-link-exact-active': checkURL('user-settings') }" class="each">
                                 User settings
                             </router-link>

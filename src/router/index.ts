@@ -9,9 +9,10 @@ import OrderDetails from '@/views/reporting/details/OrderDetails.vue'
 import SuppliersView from '@/views/reporting/screens/SuppliersView.vue'
 import ProductsView from '@/views/reporting/screens/ProductsView.vue'
 import CustomersView from '@/views/customers/screens/CustomersView.vue';
-import AdminView from '@/views/administration/AdminView.vue';
-import UsersOverview from '@/views/administration/UsersOverview.vue';
-import UserSettings from '@/views/administration/UserSettings.vue';
+
+import AdminView from '@/views/administration/screens/AdminView.vue';
+import UsersOverview from '@/views/administration/screens/UsersOverview.vue';
+import UserSettings from '@/views/administration/screens/UserSettings.vue';
 
 import { get as getFromStore } from '@/localStorage';
 import LoginView from '@/views/user/LoginView.vue'
@@ -120,6 +121,13 @@ const routes: Array<RouteRecordRaw> = [
         name: 'user-settings',
         component: UserSettings,
         props: {},
+        
+        beforeEnter: (to: any, from: any, next: any) => {
+          const isAdmin = getFromStore('logged.isAdmin');
+          if (!isAdmin) {
+            next();
+          } 
+        },
 
       },
     ],

@@ -11,7 +11,7 @@ const state = (): GlobalState => {
     // isLoggedIn: false,
     // serviceKeys: [],
     // actionlists: [],
-    // users: [],
+    users: [],
     // actionlistId: 0,
     pages: 0,
     pageNumber: 1,

@@ -1,0 +1,190 @@
+.container {
+    margin: 20px;
+  }
+  
+  // section {
+  //   // @include flex-v;
+  //   // flex-direction: row;
+  //   display: inline-block;
+  //   font-family: "IBM Plex Sans", sans-serif;
+  //   font-size: 10px;
+  //   // max-width: 80%;
+  //   padding: 20px;
+  //   box-shadow: 6px 6px 20px -4px rgba(0, 0, 0, 0.3);
+  //   margin-bottom: 24px;
+  
+  //   >header {
+  //     border-bottom: 1px solid #e0e0e0;
+  //     padding-bottom: 8px;
+  //     margin-bottom: 10px;
+  
+  //     p {
+  //       // padding: 5px 0;
+  //       // align-items: center;
+  //       font-family: "IBM Plex Sans", sans-serif;
+  //       font-size: 14px;
+  //       font-weight: bold;
+  //     }
+  //   }
+  
+  //   // label {
+  //   //   padding: 5px 0;
+  //   //   font-size: 14px;
+  //   //   font-weight: 500;
+  //   // }
+  
+  //   // select {
+  //   //   padding: 10px 0;
+  //   //   width: 100%;
+  //   //   border: 1px solid#E0E0E0;
+  //   //   margin: 10px 0;
+  //   // }
+  // }
+  
+  // button {
+  //   width: 100%;
+  //   padding: 15px;
+  // }
+
+
+  .admin-action {
+    position: fixed;
+    background: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 50px;
+    border-radius: 5px;
+    margin-top: 3rem;
+  
+    &-title {
+      border-bottom: 1px solid #bebebe;
+    }
+  
+    &-content {
+      margin-top: 20px;
+  
+      form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        grid-gap: 20px;
+  
+        div {
+          grid-column: span 1;
+  
+          input {
+            width: 90%;
+            height: 40px;
+            padding: 0 10px;
+          }
+          select {
+            width: 95%;
+            height: 44px;
+            padding: 0 10px;
+          }
+        }
+  
+        // .form-btns {
+        //   grid-column: span 2;
+        //   display: flex;
+        //   justify-content: space-between;
+  
+          button {
+            max-width: 120px;
+          }
+        // }
+      }
+    }
+  
+    // &-btns {
+    //   margin-top: 20px;
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
+  }
+
+
+
+
+// // later add
+//   .settings-row{
+//     width: 100%;
+//     display: grid;
+//     grid-template-columns: repeat(12, minmax(50px, 1fr));
+//     padding: 20px;
+//     background: #FFFFFF;
+//     border: 1px solid #E4E3E1;
+//     border-radius: 10px;
+//     margin-bottom: 30px;
+  
+//     &-column{
+//       padding: 0 10px;
+//       grid-column: span 4;
+//       font-family: 'IBM Plex Sans';
+//       font-style: normal;
+//       color: #313F57;
+  
+//       .label{
+//         font-weight: 700;
+//         font-size: 14px;
+//         line-height: 18px;
+//       }
+      
+//       .button{
+//         margin-left: 0;
+//       }
+  
+//       &-title{
+//         font-weight: 500;
+//         font-size: 20px;
+//         line-height: 26px;
+//         margin-top: 6px;
+//         margin-bottom: 4px;
+//       }
+//       &-desc{
+//         font-weight: 400;
+//         font-size: 14px;
+//         line-height: 18px;
+//       }
+  
+//       .info{
+//         font-weight: 700;
+//         font-size: 14px;
+//         line-height: 18px;
+//         margin-bottom: 20px;
+//         p{
+//           margin: 2px 0;
+//         }
+  
+//         &:first-child{
+//           margin-top: 4px;
+//         }
+//       }
+//       .select {
+//         position: relative;
+//         > select {
+//           font-size: 14px;
+//           border-radius: 8px;
+//           width: 100%;
+//           border: 1px solid #E4E3E1;
+//           color: #313F57;
+//           width: 100%;
+//           padding: 16px;
+//           padding-right: 36px;
+//           margin-top: 8px;
+  
+//           &:hover {
+//             cursor: pointer;
+//           }
+  
+//           &:disabled {
+//             opacity: 0.7;
+//             &:hover {
+//               cursor: not-allowed;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }

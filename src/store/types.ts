@@ -1,6 +1,7 @@
 import { ICustomer } from "@/models/ICustomer";
 import { IOrder } from "@/models/IOrder";
 import { IProduct } from "@/models/IProduct";
+import { IUser } from "@/models/IUser";
 // import { IActionList } from '@/models/IActionList';
 // import { IUser } from '@/models/IUser';
 import { IPaginationDetailedInfo } from '@/models/IUtilModels';
@@ -18,7 +19,7 @@ export interface GlobalState {
   //   isLoggedIn: boolean;
   //   serviceKeys: IServiceKey[];
   //   actionlists: IActionList[];
-  //   users: IUser[];
+    users: IUser[];
   //   actionlistId: number;
     pages: number;
     pageNumber: number;
