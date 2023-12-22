@@ -240,22 +240,22 @@
         }
       }
 
-      > .options {
-        @include flex-h;
-        align-items: center;
-        padding-right: 40px;
+      // > .options {
+      //   @include flex-h;
+      //   align-items: center;
+      //   padding-right: 40px;
 
-        > .data-filters {
-          @include flex-h;
-          align-items: center;
-          //   @include not-last-child {
-          //     margin-right: 32px;
-          //   }
-          .button {
-            font-size: 14px;
-          }
-        }
-      }
+      //   > .data-filters {
+      //     @include flex-h;
+      //     align-items: center;
+      //     //   @include not-last-child {
+      //     //     margin-right: 32px;
+      //     //   }
+      //     .button {
+      //       font-size: 14px;
+      //     }
+      //   }
+      // }
     }
 
     @include flex-v;

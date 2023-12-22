@@ -10,6 +10,8 @@ import SuppliersView from '@/views/reporting/screens/SuppliersView.vue'
 import ProductsView from '@/views/reporting/screens/ProductsView.vue'
 import CustomersView from '@/views/customers/screens/CustomersView.vue';
 import AdminView from '@/views/administration/AdminView.vue';
+import UsersOverview from '@/views/administration/UsersOverview.vue';
+import UserSettings from '@/views/administration/UserSettings.vue';
 
 import { get as getFromStore } from '@/localStorage';
 import LoginView from '@/views/user/LoginView.vue'
@@ -87,11 +89,38 @@ const routes: Array<RouteRecordRaw> = [
        
       },
       {
-        path: '/administration',
-        name: 'administration',
+        path: '/admin-area',
+        name: 'admin-area',
         component: AdminView,
         props: {},
+        beforeEnter: (to: any, from: any, next: any) => {
+          const isAdmin = getFromStore('logged.isAdmin');
+          if (isAdmin) {
+            next();
+          } 
+          // else {
+          // }
+        },
        
+      },
+      {
+        path: '/users-overview',
+        name: 'users-overview',
+        component: UsersOverview,
+        props: {},
+        beforeEnter: (to: any, from: any, next: any) => {
+          const isAdmin = getFromStore('logged.isAdmin');
+          if (isAdmin) {
+            next();
+          } 
+        },
+      },
+      {
+        path: '/user-settings',
+        name: 'user-settings',
+        component: UserSettings,
+        props: {},
+
       },
     ],
   },

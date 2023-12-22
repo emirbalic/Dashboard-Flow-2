@@ -80,9 +80,17 @@
                             <MenuToggle_Icon class="menuToggle" />
                         </a>
                         <div class="subs">
-                            <router-link :to="{ name: 'administration' }"
-                                :class="{ 'router-link-exact-active': checkURL('administration') }" class="each">
-                                Administration
+                            <router-link v-if="isAdmin"  :to="{ name: 'admin-area' }"
+                                :class="{ 'router-link-exact-active': checkURL('admin-area') }" class="each">
+                                Admin area
+                            </router-link>
+                            <router-link v-if="isAdmin"  :to="{ name: 'users-overview' }"
+                                :class="{ 'router-link-exact-active': checkURL('users-overview') }" class="each">
+                                Users overview
+                            </router-link>
+                            <router-link :to="{ name: 'user-settings' }"
+                                :class="{ 'router-link-exact-active': checkURL('user-settings') }" class="each">
+                                User settings
                             </router-link>
                         </div>
                     </section>
@@ -172,9 +180,11 @@ export default defineComponent({
         const colorKey = ref('')
 
         // const isAllowed = computed(() => getFromStore('auth.isAllowed') || false);
-        // const isAdmin = computed(() => getFromStore('auth.isAdmin') || false);
+        const isAdmin = computed(() => getFromStore('logged.isAdmin') || false);
 
         const loggedUser = computed(() => getFromStore("logged.username") || "Not logged");
+
+        // const isAdmin = getFromStore('logged.isAdmin');
 
         const isCompact = computed(
             //   () => getFromStore('settings.hasCompactMenu') || false
@@ -219,7 +229,7 @@ export default defineComponent({
             colorKey,
 
             //   isAllowed,
-            //   isAdmin,
+              isAdmin,
             //   isCompact,
             loggedUser,
 
