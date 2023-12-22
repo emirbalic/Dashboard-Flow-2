@@ -9,6 +9,7 @@ import OrderDetails from '@/views/reporting/details/OrderDetails.vue'
 import SuppliersView from '@/views/reporting/screens/SuppliersView.vue'
 import ProductsView from '@/views/reporting/screens/ProductsView.vue'
 import CustomersView from '@/views/customers/screens/CustomersView.vue';
+import AdminView from '@/views/administration/AdminView.vue';
 
 import { get as getFromStore } from '@/localStorage';
 import LoginView from '@/views/user/LoginView.vue'
@@ -82,6 +83,13 @@ const routes: Array<RouteRecordRaw> = [
         path: '/customers',
         name: 'customers',
         component: CustomersView,
+        props: {},
+       
+      },
+      {
+        path: '/administration',
+        name: 'administration',
+        component: AdminView,
         props: {},
        
       },

@@ -56,8 +56,7 @@
                     }">
 
                         <a href="#top" @click.prevent="toggleProduct('customers')">
-                            <Callers_Icon :color="colorKey === 'customers' ? activeColor : baseColor"
-                                class="nav_icon" />
+                            <Callers_Icon :color="colorKey === 'customers' ? activeColor : baseColor" class="nav_icon" />
                             <span>Customers</span>
                             <MenuToggle_Icon class="menuToggle" />
                         </a>
@@ -69,16 +68,40 @@
                         </div>
                     </section>
 
-                 
+
+                    <section class="is-data" :class="{
+                        'is-toggled': toggledScreens.includes('administration'),
+                        'is-active': routeScreen === 'administration',
+                    }">
+
+                        <a href="#top" @click.prevent="toggleProduct('administration')">
+                            <Config_Icon :color="colorKey === 'administration' ? activeColor : baseColor" class="nav_icon" />
+                            <span>Administration</span>
+                            <MenuToggle_Icon class="menuToggle" />
+                        </a>
+                        <div class="subs">
+                            <router-link :to="{ name: 'administration' }"
+                                :class="{ 'router-link-exact-active': checkURL('administration') }" class="each">
+                                Administration
+                            </router-link>
+                        </div>
+                    </section>
+
+
+
+
+                    
+
 
 
                 </section>
 
-                <!-- -->
+
                 <section class="bottom-nav">
                     <a @click.prevent="logout">
                         <Logout_Icon class="nav_icon" />
-                        <span style="margin-left: 9px;">Log out {{ loggedUser[0].toUpperCase() + loggedUser.slice(1) }}</span>
+                        <span style="margin-left: 9px;">Log out {{ loggedUser[0].toUpperCase() + loggedUser.slice(1)
+                        }}</span>
                     </a>
                 </section>
 
@@ -102,7 +125,7 @@ import { useRoute } from 'vue-router';
 // } from '@/services/store';
 
 // import api from '../api/api';
-// import Config_Icon from '@/components/icons/Config_Icon.vue';
+import Config_Icon from '@/assets/icons/Config_Icon.vue';
 // import Settings_Icon from '@/components/icons/Settings_Icon.vue';
 // import Logout_Icon from '@/components/icons/Logout_Icon.vue';
 import Home_Icon from '@/assets/icons/Home_Icon.vue';
@@ -124,7 +147,7 @@ export default defineComponent({
     components: {
         Calls_Icon,
         Callers_Icon,
-        //     Config_Icon,
+        Config_Icon,
         Home_Icon,
         MenuToggle_Icon,
         //     Settings_Icon,
@@ -160,14 +183,14 @@ export default defineComponent({
 
         //!!! needs to be solved fuck
         const toggledScreens = ref(
-            [isCompact.value ? null : 
-            router.currentRoute.value.meta.product].filter(
-                Boolean
-            )
-            
+            [isCompact.value ? null :
+                router.currentRoute.value.meta.product].filter(
+                    Boolean
+                )
+
         );
 
-        
+
         const routeScreen = computed(() => router.currentRoute.value.meta.product);
 
         const defaultLink = () => {
@@ -198,7 +221,7 @@ export default defineComponent({
             //   isAllowed,
             //   isAdmin,
             //   isCompact,
-              loggedUser,
+            loggedUser,
 
             routeScreen,
             route,
@@ -215,3 +238,27 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss"></style>
+
+
+
+
+
+
+
+
+
+                    <!-- v-if="isAllowed && isAdmin"
+                    <section :to="{ name: 'administration' }" class="is-data"
+                        @click.prevent="toggleProduct('administration')" :class="{
+                            'is-toggled': toggledScreens.includes('administration'),
+                            'is-active': routeScreen === 'administration',
+                            // 'single': routeProduct === 'administration'
+                        }">
+                     v-if="isAdmin" -->
+                        <!-- <router-link :to="{ name: 'administration' }"
+                            :class="{ 'router-link-exact-active': checkURL('administration') }">
+                            <Config_Icon :color="colorKey === 'administration' ? activeColor : baseColor"
+                                class="nav_icon" />
+                            <span>Users</span>
+                        </router-link>
+                    </section> --> 
