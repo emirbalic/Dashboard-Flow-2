@@ -9,20 +9,20 @@
     </header>
     <div class="container">
       <Tabs>
-        <Tab title="Unblock user">
-          <p class="title">Unblock user</p>
-        </Tab>
         <Tab title="Add new user">
           <add-user-action></add-user-action>
         </Tab>
         <Tab title="Delete user">
           <delete-user-action :users="users"></delete-user-action>
         </Tab>
+        
+        <Tab title="Unblock user">
+          <unblock-user-action :blocked-users="blockedUsers"></unblock-user-action>
+        </Tab>
 
         <Tab title="Reset user password">
           <p class="title">Reset user password</p>
         </Tab>
-       
        
         <Tab title="Update user activity">
           <p class="title">Update user activity</p>
@@ -47,14 +47,18 @@ import { IUser } from '@/models/IUser';
 //   import ChangePasswordModal from '../modals/ChangePasswordModal.vue';
 import AddUserAction from '@/views/administration/actions/AddUserAction.vue'
 import DeleteUserAction from '@/views/administration/actions/DeleteUserAction.vue'
-import { get as getFromStore, remove as removeFromStore } from '@/localStorage';
+import UnblockUserAction from '@/views/administration/actions/UnblockUserAction.vue'
+
+import { get as getFromStore } from '@/localStorage';
 
 export default defineComponent({
   components: {
     Tab,
     Tabs,
+
     AddUserAction,
-    DeleteUserAction
+    DeleteUserAction,
+    UnblockUserAction
   },
   setup() {
    
@@ -69,6 +73,12 @@ export default defineComponent({
         return filteredData;
     });
 
+    const blockedUsers = computed(() => {
+      let data = users.value;
+      let blockedUsers = data.filter((user: IUser) => user.is_blocked === true)
+      return blockedUsers
+    })
+
     const updateList = async () => {
         return Promise.allSettled([
             store.dispatch('administration/setUsers')
@@ -79,6 +89,7 @@ export default defineComponent({
     })
 
     return {
+      blockedUsers,
       users
      
     };

@@ -31,6 +31,15 @@ export const deleteUser = (id: string) => {
     });;
   };
 
+  export const unblockUser = (username: string) => {    
+    return api.post(
+      URLS.users + 'admin-reset-login-attempts',
+      {
+        target_user: username,
+      }
+    );
+  };
+
 export const getUsers = () => {
     
   return new Promise((resolve, reject) => {

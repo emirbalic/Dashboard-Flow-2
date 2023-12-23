@@ -1,7 +1,8 @@
 import {
     addUser,
     deleteUser,
-    getUsers
+    getUsers,
+    unblockUser
  
   } from '@/api/admin';
   import { IUser, IUserFormValues } from '@/models/IUser';
@@ -29,6 +30,11 @@ import {
         state.users = state.users.filter((user) => {
           return user.id != Number(id);
         });
+      },
+      UNBLOCK_USER(state: GlobalState, selectedUsername: string) {
+        state.users[
+          state.users.findIndex((user) => user.username === selectedUsername)
+        ].is_blocked = false;
       },
     },
   
@@ -66,6 +72,17 @@ import {
           .then(() => {
             commit('DELETE_USER', payload.id);
             dispatch('setUsers', 'users');
+            return true;
+          })
+          .catch(() => {
+            return false;
+          });
+      },
+      unblockUser({ commit }: { commit: Commit }, payload: any) {
+       
+        return unblockUser(payload)
+          .then(() => {
+            commit('UNBLOCK_USER', payload.selectedUser);
             return true;
           })
           .catch(() => {
