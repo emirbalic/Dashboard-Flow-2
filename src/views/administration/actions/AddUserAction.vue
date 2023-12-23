@@ -5,7 +5,7 @@
           <h3><b>New User Properties</b></h3>
         </div>
         <div class="admin-action-content">
-          <form @submit.prevent="checkForm">
+          <form @submit.prevent="submitForm">
             <div>
               <label for="username">Username*</label>
               <input
@@ -96,8 +96,17 @@
       let email = ref('');
       let isAdmin = ref(0);
       let password = ref('');
+
+      const cleanForm = () => {
+        username.value = '',
+          firstName.value = '',
+          lastName.value = '',
+          email.value = '',
+          isAdmin.value = 0,
+          password.value = ''
+      }
   
-      const checkForm = async () => {
+      const submitForm = async () => {
         const body = {
           username: username.value,
           firstName: firstName.value,
@@ -107,8 +116,11 @@
           passwd: password.value,
         };
   
-        // let status = 
-        await store.dispatch('administration/addUser', body);
+        let status = await store.dispatch('administration/addUser', body);
+
+        if(status) {
+          cleanForm()
+        }
   
         // if (!status) {
         //   showNotice({
@@ -139,7 +151,7 @@
         password,
         username,
   
-        checkForm,
+        submitForm,
       };
     },
   });

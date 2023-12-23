@@ -1,62 +1,38 @@
 <template>
     <header>
         <div class="title">
-
-            Customers / Customers
+            Users / Users
         </div>
-
     </header>
-
-
-    <!-- @click="closeDropdown" -->
     <div class="body">
-
-
-        <h3>System loaded {{ customers?.length }} customers</h3>
-
+        <h3>System loaded {{ users?.length }} users</h3>
         <table>
             <thead>
                 <tr>
-
+                    <th>Username</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Title</th>
-                    <th>Gender</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>Region</th>
-                    <th>Postal code</th>
-                    <th>Country</th>
-                    <th>Phone</th>
                     <th>Email</th>
-                    <!-- <th>Actions</th> -->
+                    <th>Last logged</th>
+                    <th>Is Admin</th>
+                    <th>Is active</th>
+                    <th>Require password change</th>
+                    <th>Password date change </th>
+                    <th>Blocked status date change</th>                   
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, i) in customers" :key="i">
-                    <!-- <td>{{ item.id }}</td> -->
-                    <!-- <td>{{ formatDate(item.order_date) }}</td> -->
-
+                <tr v-for="(item, i) in users" :key="i">
+                    <td>{{ item.username }}</td>
                     <td>{{ item.first_name }}</td>
                     <td>{{ item.last_name }}</td>
-                    <td>{{ item.title }}</td>
-
-                    <td>{{ item.gender }}</td>
-                    <td>{{ item.address }}</td>
-                    <td>{{ item.city }}</td>
-                    <td>{{ item.region }}</td>
-                    <td>{{ item.postal_code }}</td>
-                    <td>{{ item.country }}</td>
-                    <td>{{ item.phone }}</td>
                     <td>{{ item.email }}</td>
-                    <!-- <td>
-                        <span>
-                            <Block_Icon class="table_icon" @click="goToEdit(item.type_short, item.id, item.type)" />
-                        </span>
-                        <span style="margin-left: .8rem;" @click="() => openDeleteModal(item.id, item.id)">
-                            <Unblock_Icon class="table_icon" />
-                        </span>
-                    </td> -->
+                    <td>{{ item.last_login ? formatDate(item.last_login) : 'Never logged'}}</td>
+                    <td>{{ item.is_staff }}</td>
+                    <td>{{ item.is_active }}</td>
+                    <td>{{ item.required_password_change }}</td>
+                    <td>{{ item.password_change_date ? formatDate(item.password_change_date) : 'Not set'}}</td>
+                    <td>{{ item.is_blocked }}</td>
                 </tr>
             </tbody>
         </table>
@@ -64,63 +40,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
-// import dayjs from 'dayjs';
-import { loadCustomers } from '@/api/customers';
-import Block_Icon from '@/assets/icons/Block_Icon.vue';
-import Unblock_Icon from '@/assets/icons/Unblock_Icon.vue';
-// import formatDate from '@/composables/util'
+import { formatDate } from '@/composables/util'
 
 export default defineComponent({
-    components: {
-        Block_Icon,
-        Unblock_Icon
-    },
+ 
     setup() {
 
         const store = useStore();
-        const customers = ref();
-
-        const getCustomers = async () => {
-
-
-            // this is just because of pagination, originaly do the one line only
-            let data: any = await loadCustomers();
-            customers.value = data.results;
-            // console.log(customers.value);
-
-
+        const users = computed(() => {
+            let data = store.getters['administration/getUsers'];
+            if (!data) return
+            return data;
+        });
+        const updateList = async () => {
+            return Promise.allSettled([
+                store.dispatch('administration/setUsers')
+            ])
         }
-
-        // const formatDate = (date: Date) => {
-        //     return dayjs(date).format('DD/MM/YYYY');
-        // };
-
-        const goToEdit = (option: string, id: number, type: string) => {
-            // router.push({
-            //   name: 'rule-management-rules-details',
-            //   params: {
-            //     option,
-            //     id,
-            //     type
-            //   }
-            // })
-        }
-
-        const openDeleteModal = (id: string, title: string) => {
-            // entityTitle.value = title;
-            // isDeleteModalVisible.value = true;
-            // ruleRecordIdToDelete.value = id;
-        };
         onMounted(() => {
-            getCustomers();
+            updateList()
         })
 
         return {
-            customers,
-            // goToEdit,
-            // openDeleteModal
+            users,
+            formatDate
         }
     }
 })
