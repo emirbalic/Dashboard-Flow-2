@@ -16,9 +16,20 @@ export const addUser = (body: IUserFormValues) => {
       passwd: body.passwd,
     })
     .catch((error) => {
-      console.log("add User >> ", error);
+      console.error("add User >> ", error);
     });
 };
+
+export const deleteUser = (id: string) => {
+    return api.post(
+      URLS.users + `delete`,
+      {
+        user_id: id,
+      }
+    ) .catch((error) => {
+      console.error('delete User >> ', error);
+    });;
+  };
 
 export const getUsers = () => {
     
@@ -33,7 +44,7 @@ export const getUsers = () => {
         }
       })
       .catch((error) => {
-        console.log("get Users >> ", error);
+        console.error("get Users >> ", error);
       });
   });
 };

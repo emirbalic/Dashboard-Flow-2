@@ -33,7 +33,7 @@
                     </small>
                 </strong>
             </label>
-            <div class="content-wrapper">
+            <div>
 
                 <select v-model="customerId">
                     <option value="" disabled selected>Select Customer</option>

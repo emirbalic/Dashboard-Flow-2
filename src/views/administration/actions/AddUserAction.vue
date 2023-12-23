@@ -5,6 +5,7 @@
           <h3><b>New User Properties</b></h3>
         </div>
         <div class="admin-action-content">
+          
           <form @submit.prevent="submitForm">
             <div>
               <label for="username">Username*</label>
@@ -58,12 +59,12 @@
             </div>
             <div>
               <label for="is-admin">Is Admin *</label>
-              <div class="select">
+              <!-- <div class="select"> -->
                 <select required id="is-admin" v-model="isAdmin" name="is-admin">
                   <option :value="1">Yes</option>
                   <option selected :value="0">No</option>
                 </select>
-              </div>
+              <!-- </div> -->
             </div>
            
               <button type="submit" class="button is-primary">
@@ -80,6 +81,9 @@
   import { defineComponent, ref } from 'vue';
   import { useStore } from 'vuex';
 //   import { showNotice } from '@/services/view';
+
+import router from '@/router';
+
   
   export default defineComponent({
     // components: {
@@ -121,6 +125,10 @@
         if(status) {
           cleanForm()
         }
+
+        router.push({
+                name: 'users-overview',
+            });
   
         // if (!status) {
         //   showNotice({

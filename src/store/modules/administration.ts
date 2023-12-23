@@ -1,5 +1,6 @@
 import {
     addUser,
+    deleteUser,
     getUsers
  
   } from '@/api/admin';
@@ -24,6 +25,11 @@ import {
         user.is_active = true;
         state.users.push(user);
       },
+      DELETE_USER(state: GlobalState, id: string) {
+        state.users = state.users.filter((user) => {
+          return user.id != Number(id);
+        });
+      },
     },
   
     actions: {
@@ -47,7 +53,19 @@ import {
         return addUser(user)
           .then(() => {
             commit('ADD_USER', user);
-            // dispatch('setUsers', 'users');
+            dispatch('setUsers', 'users');
+            return true;
+          })
+          .catch(() => {
+            return false;
+          });
+      },
+
+      deleteUser({ dispatch, commit }: any, payload: Partial<IUser>) {
+        return deleteUser(String(payload.id))
+          .then(() => {
+            commit('DELETE_USER', payload.id);
+            dispatch('setUsers', 'users');
             return true;
           })
           .catch(() => {
