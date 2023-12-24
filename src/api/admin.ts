@@ -1,5 +1,6 @@
 import { IUserFormValues } from "@/models/IUser";
 import api from "./api";
+import { IUpdatePassword } from "@/models/IUtilModels";
 
 const URLS = {
   users: "users/",
@@ -36,6 +37,16 @@ export const deleteUser = (id: string) => {
       URLS.users + 'admin-reset-login-attempts',
       {
         target_user: username,
+      }
+    );
+  };
+
+  export const updateUserPassword = (params: IUpdatePassword) => {
+    return api.post(
+      URLS.users + 'admin-reset-password',
+      {
+        new_passwd: params.new_passwd,
+        target_user: params.target_user,
       }
     );
   };

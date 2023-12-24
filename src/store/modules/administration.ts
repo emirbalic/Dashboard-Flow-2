@@ -2,10 +2,12 @@ import {
     addUser,
     deleteUser,
     getUsers,
-    unblockUser
+    unblockUser,
+    updateUserPassword
  
   } from '@/api/admin';
   import { IUser, IUserFormValues } from '@/models/IUser';
+import { IUpdatePassword } from '@/models/IUtilModels';
   import { GlobalState } from '@/store/types';
   
   import { Commit } from 'vuex';
@@ -83,6 +85,15 @@ import {
         return unblockUser(payload)
           .then(() => {
             commit('UNBLOCK_USER', payload.selectedUser);
+            return true;
+          })
+          .catch(() => {
+            return false;
+          });
+      },
+      updateUserPassword(_: any, payload: IUpdatePassword) {
+        return updateUserPassword(payload)
+          .then(() => {
             return true;
           })
           .catch(() => {

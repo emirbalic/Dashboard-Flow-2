@@ -9,6 +9,9 @@
     </header>
     <div class="container">
       <Tabs>
+        <Tab title="Reset user password">
+         <reset-user-password-action :users="users"></reset-user-password-action>
+        </Tab>
         <Tab title="Add new user">
           <add-user-action></add-user-action>
         </Tab>
@@ -20,9 +23,6 @@
           <unblock-user-action :blocked-users="blockedUsers"></unblock-user-action>
         </Tab>
 
-        <Tab title="Reset user password">
-          <p class="title">Reset user password</p>
-        </Tab>
        
         <Tab title="Update user activity">
           <p class="title">Update user activity</p>
@@ -48,6 +48,7 @@ import { IUser } from '@/models/IUser';
 import AddUserAction from '@/views/administration/actions/AddUserAction.vue'
 import DeleteUserAction from '@/views/administration/actions/DeleteUserAction.vue'
 import UnblockUserAction from '@/views/administration/actions/UnblockUserAction.vue'
+import ResetUserPasswordAction from '@/views/administration/actions/ResetUserPasswordAction.vue'
 
 import { get as getFromStore } from '@/localStorage';
 
@@ -58,6 +59,7 @@ export default defineComponent({
 
     AddUserAction,
     DeleteUserAction,
+    ResetUserPasswordAction,
     UnblockUserAction
   },
   setup() {
