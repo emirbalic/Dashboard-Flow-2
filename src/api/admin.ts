@@ -1,4 +1,4 @@
-import { IUserFormValues } from "@/models/IUser";
+import { IUser, IUserFormValues } from "@/models/IUser";
 import api from "./api";
 import { IUpdatePassword } from "@/models/IUtilModels";
 
@@ -47,6 +47,16 @@ export const deleteUser = (id: string) => {
       {
         new_passwd: params.new_passwd,
         target_user: params.target_user,
+      }
+    );
+  };
+
+  export const updateUserActivityStatus = (params: Partial<IUser>) => {
+    return api.post(
+      URLS.users + 'update-activity',
+      {
+        username: params.username,
+        activity: params.is_active,
       }
     );
   };

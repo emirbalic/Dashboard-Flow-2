@@ -9,8 +9,8 @@
         </div>
         <div class="admin-action-content">
             <div class="single-select">
-                <select id="select" v-model="username">
-                    <option value="" disabled selected>Select User</option>
+                <select  v-model="username">
+                    <option value="" disabled >Select User</option>
                     <option v-for="user in users" :key="user.id" :value="user.username">
                         {{ user.username }}
                     </option>

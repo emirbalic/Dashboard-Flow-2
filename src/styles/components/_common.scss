@@ -16,6 +16,25 @@
     color: $color-white;
     border-radius: 5px;
   }
+  &.is-secondary {
+    background-color: $color-brand-2;
+    border-color: $color-brand-2;
+    color: $color-white;
+    border-radius: 5px;
+    &:hover {
+      cursor: pointer;
+      background-color: $color-brand-action-2;
+      border-color: $color-brand-action-2;
+    }
+    // // add with UX
+    // &[disabled] {
+    //   opacity: 0.6;
+    //   &:hover {
+    //     cursor: not-allowed;
+    //     background-color: $color-brand-2;
+    //   }
+    // }
+  }
 
   &.is-cancel {
     background-color: $color-4;
@@ -34,6 +53,8 @@
     opacity: 0.6;
     &:hover {
       cursor: not-allowed;
+       // // add with UX
+      // background-color: $color-brand-1;
     }
   }
 

@@ -1,16 +1,13 @@
 
 <template>
-  <!-- <change-password-modal @close-modal="closeModal" v-if="isPasswordModalActive"></change-password-modal> -->
 
-  <!-- @keyup.esc="closeModal" -->
-  <!-- <div class="settings-screen" > -->
     <header>
       <h2 class="title">Admin area</h2>
     </header>
     <div class="container">
       <Tabs>
-        <Tab title="Reset user password">
-         <reset-user-password-action :users="users"></reset-user-password-action>
+        <Tab title="Update user activity">
+          <update-user-activity-action :users="users"></update-user-activity-action>
         </Tab>
         <Tab title="Add new user">
           <add-user-action></add-user-action>
@@ -22,11 +19,11 @@
         <Tab title="Unblock user">
           <unblock-user-action :blocked-users="blockedUsers"></unblock-user-action>
         </Tab>
-
-       
-        <Tab title="Update user activity">
-          <p class="title">Update user activity</p>
+        
+        <Tab title="Reset user password">
+         <reset-user-password-action :users="users"></reset-user-password-action>
         </Tab>
+       
        
       </Tabs>
     </div>
@@ -49,6 +46,7 @@ import AddUserAction from '@/views/administration/actions/AddUserAction.vue'
 import DeleteUserAction from '@/views/administration/actions/DeleteUserAction.vue'
 import UnblockUserAction from '@/views/administration/actions/UnblockUserAction.vue'
 import ResetUserPasswordAction from '@/views/administration/actions/ResetUserPasswordAction.vue'
+import UpdateUserActivityAction from '@/views/administration/actions/UpdateUserActivityAction.vue'
 
 import { get as getFromStore } from '@/localStorage';
 
@@ -60,7 +58,8 @@ export default defineComponent({
     AddUserAction,
     DeleteUserAction,
     ResetUserPasswordAction,
-    UnblockUserAction
+    UnblockUserAction,
+    UpdateUserActivityAction
   },
   setup() {
    

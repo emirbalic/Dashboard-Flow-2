@@ -122,12 +122,12 @@ const routes: Array<RouteRecordRaw> = [
         component: UserSettings,
         props: {},
         
-        beforeEnter: (to: any, from: any, next: any) => {
-          const isAdmin = getFromStore('logged.isAdmin');
-          if (!isAdmin) {
-            next();
-          } 
-        },
+        // beforeEnter: (to: any, from: any, next: any) => {
+        //   const isAdmin = getFromStore('logged.isAdmin');
+        //   if (!isAdmin) {
+        //     next();
+        //   } 
+        // },
 
       },
     ],
