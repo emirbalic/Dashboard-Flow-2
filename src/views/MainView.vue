@@ -23,7 +23,7 @@
 
                     <div class="section-title">DASHBOARDS</div>
 
-                    <section class="is-data" :class="{
+                    <section v-if="!requiresReset" class="is-data" :class="{
                         'is-toggled': toggledScreens.includes('reporting'),
                         'is-active': routeScreen === 'reporting',
                     }">
@@ -50,7 +50,7 @@
                         </div>
                     </section>
 
-                    <section class="is-data" :class="{
+                    <section v-if="!requiresReset" class="is-data" :class="{
                         'is-toggled': toggledScreens.includes('customers'),
                         'is-active': routeScreen === 'customers',
                     }">
@@ -68,7 +68,7 @@
                         </div>
                     </section>
 
-
+                    <!-- v-if="!requiresReset" -->
                     <section class="is-data" :class="{
                         'is-toggled': toggledScreens.includes('administration'),
                         'is-active': routeScreen === 'administration',
@@ -80,11 +80,11 @@
                             <MenuToggle_Icon class="menuToggle" />
                         </a>
                         <div class="subs">
-                            <router-link v-if="isAdmin"  :to="{ name: 'admin-area' }"
+                            <router-link v-if="isAdmin && !requiresReset"  :to="{ name: 'admin-area' }"
                                 :class="{ 'router-link-exact-active': checkURL('admin-area') }" class="each">
                                 Admin area
                             </router-link>
-                            <router-link v-if="isAdmin"  :to="{ name: 'users-overview' }"
+                            <router-link v-if="isAdmin && !requiresReset"  :to="{ name: 'users-overview' }"
                                 :class="{ 'router-link-exact-active': checkURL('users-overview') }" class="each">
                                 Users overview
                             </router-link>
@@ -184,6 +184,9 @@ export default defineComponent({
         const isAdmin = computed(() => getFromStore('logged.isAdmin') || false);
 
         const loggedUser = computed(() => getFromStore("logged.username") || "Not logged");
+        const requiresReset = computed(() => getFromStore("logged.requiresReset"));
+        // console.log(requiresReset.value);
+        
 
         // const isAdmin = getFromStore('logged.isAdmin');
 
@@ -233,6 +236,8 @@ export default defineComponent({
               isAdmin,
             //   isCompact,
             loggedUser,
+
+            requiresReset,
 
             routeScreen,
             route,

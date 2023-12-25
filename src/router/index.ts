@@ -149,7 +149,8 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   const isLogged = Boolean(getFromStore('logged'));
-  // console.log('is logged', isLogged);
+  const requiresReset = getFromStore("logged.requiresReset");
+  // console.log('is requiresReset', requiresReset);
   
   if (
     // make sure the user is authenticated
@@ -160,6 +161,10 @@ router.beforeEach(async (to, from) => {
   {
     // redirect the user to the login page
     return { name: 'login' }
+  }
+  else if(requiresReset && to.name !== 'user-settings')
+  {
+    return {name: 'user-settings'}
   }
 })
 
