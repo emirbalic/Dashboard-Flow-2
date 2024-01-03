@@ -6,7 +6,7 @@
     <div class="container">
       <Tabs>
         <Tab title="Update password" >
-          <p class="title">Update password</p>
+          <reset-own-password-action></reset-own-password-action>
         </Tab>
         <Tab title="Update profile" >
           <p v-if="!requiresReset"  class="title">Update profile</p>
@@ -25,12 +25,14 @@
 import { computed, defineComponent } from 'vue';
 import Tab from '@/components/common/Tab.vue';
 import Tabs from '@/components/common/Tabs.vue';
+import ResetOwnPasswordAction from '@/views/administration/actions/ResetOwnPasswordAction.vue'
 
 
 import { get as getFromStore } from '@/localStorage';
 
 export default defineComponent({
   components: {
+    ResetOwnPasswordAction,
     Tab,
     Tabs,
   },

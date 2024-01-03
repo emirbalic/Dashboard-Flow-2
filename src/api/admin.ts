@@ -61,6 +61,19 @@ export const deleteUser = (id: string) => {
     );
   };
 
+  export const resetOwnPassword = (params: IUpdatePassword) => {
+    console.log("params >>>> .... ", params);
+    
+    return api.post(
+      URLS.users + 'user-reset-password',
+      {
+        new_passwd: params.new_passwd,
+        confirm_passwd: params.new_passwd,
+        // target_user: params.target_user,
+      }
+    );
+  };
+
 export const getUsers = () => {
     
   return new Promise((resolve, reject) => {

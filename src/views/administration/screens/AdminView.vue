@@ -6,9 +6,6 @@
     </header>
     <div class="container">
       <Tabs>
-        <Tab title="Update user activity">
-          <update-user-activity-action :users="users"></update-user-activity-action>
-        </Tab>
         <Tab title="Add new user">
           <add-user-action></add-user-action>
         </Tab>
@@ -21,9 +18,12 @@
         </Tab>
         
         <Tab title="Reset user password">
-         <reset-user-password-action :users="users"></reset-user-password-action>
+          <reset-user-password-action :users="users"></reset-user-password-action>
         </Tab>
-       
+        
+        <Tab title="Update user activity">
+          <update-user-activity-action :users="users"></update-user-activity-action>
+        </Tab>
        
       </Tabs>
     </div>
