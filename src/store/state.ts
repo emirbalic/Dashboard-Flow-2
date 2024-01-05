@@ -1,5 +1,6 @@
 import { IOrder } from '@/models/IOrder';
 import { GlobalState } from './types';
+import { IUser } from '@/models/IUser';
 
 const state = (): GlobalState => {
   return {
@@ -12,6 +13,7 @@ const state = (): GlobalState => {
     // serviceKeys: [],
     // actionlists: [],
     users: [],
+    user: null as any,
     // actionlistId: 0,
     pages: 0,
     pageNumber: 1,

@@ -57,6 +57,7 @@ export default defineComponent({
         console.info(' logging successfull !!!!', response.data)
         saveToStore('logged', {
           username: response.data.username,
+          id: response.data.id,
           isAdmin: response.data.is_admin,
           access_token: response.data.access,
           refresh_token: response.data.refresh,

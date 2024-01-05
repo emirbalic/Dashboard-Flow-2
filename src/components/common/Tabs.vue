@@ -1,6 +1,5 @@
 <template>
     <div class="tabs">
-        <!-- name="screen-display" -->
         <input v-for="(tab, i) in tabs" :key="i" type="radio" :id="tab" class="option" @click="selectedTab = tab; $emit('tabChange', tab)">
         <label v-for="(tab, i) in tabs" :key="i" :for="tab" :class="selectedTab === tab ? 'checked':''">{{ tab }}</label>
     </div>

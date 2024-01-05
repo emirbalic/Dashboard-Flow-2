@@ -20,6 +20,7 @@ export interface GlobalState {
   //   serviceKeys: IServiceKey[];
   //   actionlists: IActionList[];
     users: IUser[];
+    user: IUser;
   //   actionlistId: number;
     pages: number;
     pageNumber: number;

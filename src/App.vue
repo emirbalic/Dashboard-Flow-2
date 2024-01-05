@@ -51,6 +51,7 @@ export default defineComponent({
 
         saveToStore('logged', {
           username: logged.value.username,
+          id: response.data.id,
           isAdmin: logged.value.isAdmin,
           requiresReset: logged.value.requires_reset,
           access_token: response.data.access,
