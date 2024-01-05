@@ -87,6 +87,10 @@ export const updateOwnProfile = (params: Partial<IUser>) => {
 
 
 
+export const deactivate = () => {
+  return api.post(URLS.users + "deactivate", {});
+};
+
 
 
 

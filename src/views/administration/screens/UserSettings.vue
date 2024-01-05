@@ -1,7 +1,7 @@
 
 <template>
     <header>
-      <h2 class="title">Admin area</h2>
+      <h2 class="title">User area</h2>
     </header>
     <div class="container">
       <Tabs>
@@ -16,10 +16,8 @@
           <reset-own-password-action></reset-own-password-action>
         </Tab>
 
-        <Tab title="Contact admin" >
-          <p v-if="!requiresReset"  class="title">My profile</p>
-          
-          <p v-else>{{  NOT_AUTHORIZED }}</p>
+        <Tab title="Deactivate" >
+          <user-deactivate-action></user-deactivate-action>
         </Tab>
       </Tabs>
     </div>
@@ -31,8 +29,8 @@ import { computed, defineComponent, onMounted } from 'vue';
 import Tab from '@/components/common/Tab.vue';
 import Tabs from '@/components/common/Tabs.vue';
 import ResetOwnPasswordAction from '@/views/administration/actions/ResetOwnPasswordAction.vue'
-import MyProfileView from '@/views/administration/actions/MyProfileView.vue'
 import UpdateOwnProfileAction from '@/views/administration/actions/UpdateOwnProfileAction.vue'
+import UserDeactivateAction from '@/views/administration/actions/UserDeactivateAction.vue'
 
 import { useStore } from 'vuex';
 
@@ -41,7 +39,7 @@ import { IUser } from '@/models/IUser';
 
 export default defineComponent({
   components: {
-    // MyProfileView,
+    UserDeactivateAction,
     ResetOwnPasswordAction,
     Tab,
     Tabs,
@@ -54,8 +52,7 @@ export default defineComponent({
 
     const userId = computed(() => getFromStore("logged.id"));
     const setUser = async () => {
-     
-      
+
             return Promise.allSettled([
                 store.dispatch('administration/setUser', userId.value)
             ])
@@ -63,14 +60,19 @@ export default defineComponent({
 
     const user = computed(() => {
         let user = store.getters['administration/getUser'];
-        if (!user) return
-        // let filteredData = data.filter((user: IUser) => user.username !== loggedUser.value);
-        // console.log(user.id);
-        
+        if (!user) return        
         return user;
     });
 
     const requiresReset = computed(() => getFromStore("logged.requiresReset"));
+
+
+    const admins = computed(() => {
+        let data = store.getters['administration/getUsers'];
+        if (!data) return
+        let filteredData = data.filter((x: IUser) => x.is_staff === true);
+        return filteredData;
+    });
 
     onMounted(() => {
       setUser()
@@ -78,6 +80,8 @@ export default defineComponent({
 
     return {
         NOT_AUTHORIZED,
+
+        admins,
         requiresReset,
 
         user,
