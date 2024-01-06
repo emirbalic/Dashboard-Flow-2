@@ -5,7 +5,7 @@
    <router-view v-if="Boolean(logged)"></router-view>
     <login-view v-else></login-view>
 
-
+    <outlets></outlets> 
     <!-- <login-view />
 
   <router-view /> -->
@@ -21,10 +21,13 @@ import { get as getFromStore, load as loadFromStore } from '@/localStorage';
 import { save as saveToStore } from '@/localStorage';
 import { updateToken } from '@/api/users';
 
+import Outlets from '@/components/common/Outlets.vue';
 
 export default defineComponent({
   components: {
-    LoginView
+    LoginView,
+    Outlets,
+
   },
   setup() {
 

@@ -1,0 +1,81 @@
+// .tmp {
+//   min-height: 100vh;
+//   font-family: "IBM Plex Sans", sans-serif;
+//   color: $color-brand-2;
+//   background-color: $color-white;
+
+  .outlets {
+    @include full-fix;
+    pointer-events: none;
+    z-index: 100;
+    max-height: 100vh;
+    z-index: 20000;
+
+    // > .modals {
+    //   @include full-abs;
+    // }
+
+    > .notices {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      min-width: 50%;
+      max-width: 70%;
+
+      @include flex-v;
+      justify-content: flex-end;
+      @include not-last-child {
+        margin-bottom: 16px;
+      }
+    }
+
+    .notice {
+      @include box;
+      @include flex-h;
+      align-items: center;
+      pointer-events: all;
+      border-radius: 8px;
+      padding-right: 24px; // for close button aesthetics
+
+    //   &.is-error {
+    //     > header {
+    //       > .icon {
+    //         background-color: $color-brand-1;
+    //         color: $color-white;
+    //         height: 40px;
+    //         width: 40px;
+    //         border-radius: 50%;
+    //         padding: 9px;
+    //       }
+    //     }
+    //   }
+    //   &.is-success {
+    //     > header {
+    //       > .icon {
+    //         background-color: $color-brand-2;
+    //         color: $color-white;
+    //         height: 40px;
+    //         width: 40px;
+    //         border-radius: 50%;
+    //         padding: 8px;
+    //       }
+    //     }
+    //   }
+
+      > header {
+        padding: 16px;
+        border-right: 1px solid $color-g-2;
+      }
+
+      > .body {
+        flex: 1;
+        padding: 8px 16px;
+      }
+
+      > .close {
+        padding: 8px 16px;
+        @include clickable();
+      }
+    }
+  }
+// }

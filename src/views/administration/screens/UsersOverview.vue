@@ -18,7 +18,7 @@
                     <th>Is active</th>
                     <th>Require password change</th>
                     <th>Password date change </th>
-                    <th>Blocked status date change</th>                   
+                    <th>Blocked</th>                   
                 </tr>
             </thead>
             <tbody>
@@ -28,11 +28,11 @@
                     <td>{{ item.last_name }}</td>
                     <td>{{ item.email }}</td>
                     <td>{{ item.last_login ? formatDate(item.last_login) : 'Never logged'}}</td>
-                    <td>{{ item.is_staff }}</td>
-                    <td>{{ item.is_active }}</td>
-                    <td>{{ item.required_password_change }}</td>
+                    <td>{{ item.is_staff ? 'Yes' : "No"}}</td>
+                    <td>{{ item.is_active ? 'Yes' : "No"}}</td>
+                    <td>{{ item.required_password_change ? 'Yes' : "No" }}</td>
                     <td>{{ item.password_change_date ? formatDate(item.password_change_date) : 'Not set'}}</td>
-                    <td>{{ item.is_blocked }}</td>
+                    <td>{{ item.is_blocked ? 'Yes' : 'No' }}</td>
                 </tr>
             </tbody>
         </table>

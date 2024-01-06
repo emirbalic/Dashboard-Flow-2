@@ -19,14 +19,14 @@
 </template>
   
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-//   import { useStore } from 'vuex';
-//   import { showNotice } from '@/services/view';
+import { defineComponent } from 'vue';
 import { deactivate } from '@/api/admin'
 
 import { remove as removeFromStore } from '@/localStorage';
 
 import router from '@/router';
+
+import { showNotice } from '@/visuals';
 
 
 export default defineComponent({
@@ -52,24 +52,24 @@ export default defineComponent({
       //         name: 'users-overview',
       //     });
 
-      // if (!status) {
-      //   showNotice({
-      //     props: {
-      //       type: 'error',
-      //       duration: 5000,
-      //       message: `The user ${body.username} can not be created at this time`,
-      //     },
-      //   });
-      // } else {
-      //   closeModal();
-      //   showNotice({
-      //     props: {
-      //       type: 'success',
-      //       duration: 5000,
-      //       message: `The user ${body.username} successfully created`,
-      //     },
-      //   });
-      // }
+      if (!status) {
+        showNotice({
+          props: {
+            type: 'error',
+            duration: 5000,
+            // message: `The user ${body.username} can not be created at this time`,
+          },
+        });
+      } else {
+        // closeModal();
+        showNotice({
+          props: {
+            type: 'success',
+            duration: 5000,
+            // message: `The user ${body.username} successfully created`,
+          },
+        });
+      }
     };
 
 

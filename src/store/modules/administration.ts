@@ -40,6 +40,8 @@ export default {
       });
     },
     UNBLOCK_USER(state: GlobalState, selectedUsername: string) {
+      // console.log('is UNBLOCK_USER true', selectedUsername);
+      // console.log('is UNBLOCK_USER true');
       state.users[
         state.users.findIndex((user) => user.username === selectedUsername)
       ].is_blocked = false;
@@ -108,13 +110,16 @@ export default {
           return false;
         });
     },
-    unblockUser({ commit }: { commit: Commit }, payload: any) {
+    unblockUser({ commit }: { commit: Commit }, payload: string) {
       return unblockUser(payload)
         .then(() => {
-          commit("UNBLOCK_USER", payload.selectedUser);
+          // console.log('is payload.selectedUser', payload);
+          commit("UNBLOCK_USER", payload);
+          
           return true;
         })
-        .catch(() => {
+        .catch((e: any) => {
+          console.log('is returning false', e);
           return false;
         });
     },

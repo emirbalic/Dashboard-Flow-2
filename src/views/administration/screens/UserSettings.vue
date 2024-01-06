@@ -11,13 +11,15 @@
             <p v-else>{{NOT_AUTHORIZED}}</p>
           </span>
         </Tab>
-
         <Tab title="Update password" >
           <reset-own-password-action></reset-own-password-action>
         </Tab>
 
+
+
         <Tab title="Deactivate" >
-          <user-deactivate-action></user-deactivate-action>
+          <user-deactivate-action v-if="!requiresReset"></user-deactivate-action>
+          <p v-else>{{NOT_AUTHORIZED}}</p>
         </Tab>
       </Tabs>
     </div>

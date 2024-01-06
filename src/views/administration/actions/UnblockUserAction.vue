@@ -30,7 +30,7 @@ import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import { IUser } from '@/models/IUser';
 
-//   import { showNotice } from '@/services/view';
+import { showNotice } from '@/visuals';
 import router from '@/router';
 
 export default defineComponent({
@@ -51,7 +51,29 @@ export default defineComponent({
 
 
         const unblockUser = async () => {
-            await store.dispatch('administration/unblockUser', user.value);
+            let status = await store.dispatch('administration/unblockUser', user.value);
+// console.log(status);
+
+
+            if (!status) {
+            showNotice({
+              props: {
+                type: 'error',
+                duration: 5000,
+                message:
+                  `The user ${user.value} could not be unblocked at this time, you can try again later`,
+              },
+            });
+          } else {
+            showNotice({
+              props: {
+                type: 'success',
+                duration: 5000,
+                message: `The user ${user.value} successfully unblocked`,
+              },
+            });
+          }
+
             await store.dispatch('administration/setUsers')
             router.push({
                 name: 'users-overview',
@@ -59,28 +81,7 @@ export default defineComponent({
         };
 
 
-        // if (props.deletable) {
-        //   let status = await store.dispatch('admin/deleteUser', { id: props.id });
-        //   if (!status) {
-        //     showNotice({
-        //       props: {
-        //         type: 'error',
-        //         duration: 5000,
-        //         message:
-        //           `The user ${username} could not be deleted at this time, you can try again later`,
-        //       },
-        //     });
-        //   } else {
-        //     closeModal();
-        //     showNotice({
-        //       props: {
-        //         type: 'success',
-        //         duration: 5000,
-        //         message: `The user ${username} successfully deleted`,
-        //       },
-        //     });
-        //   }
-        // }
+      
 
 
 

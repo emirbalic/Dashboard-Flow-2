@@ -62,7 +62,7 @@ import { useStore } from 'vuex';
 
 import router from '@/router';
 
-import { IUser } from '@/models/IUser';
+import { showNotice } from '@/visuals';
 
 
 export default defineComponent({
@@ -113,37 +113,48 @@ export default defineComponent({
 
       let status = await store.dispatch('administration/updateOwnProfile', body);
 
-      console.log(status);
+      
       
 
-      if(status) {
-        // cleanForm()
+      // if(status) {
+      //   // cleanForm()
+      //   router.push({
+      //           name: 'users-overview',
+      //       });
+      // }
+
+
+      if (!status) {
+       
+        showNotice({
+          props: {
+            type: 'error',
+            duration: 5000,
+            message: `The user ${body.username} profile can not be updated at this time`,
+          },
+        });
+
+      
+      } else {
+        
+        showNotice({
+          props: {
+            type: 'success',
+            duration: 5000,
+            message: `The user ${body.username} successfully updated`,
+          },
+        });
+
         router.push({
                 name: 'users-overview',
             });
+        
+      
       }
-
-
-      // if (!status) {
-      //   showNotice({
-      //     props: {
-      //       type: 'error',
-      //       duration: 5000,
-      //       message: `The user ${body.username} can not be created at this time`,
-      //     },
-      //   });
-      // } else {
-      //   closeModal();
-      //   showNotice({
-      //     props: {
-      //       type: 'success',
-      //       duration: 5000,
-      //       message: `The user ${body.username} successfully created`,
-      //     },
-      //   });
-      // }
     };
 
+
+    
    
     return {
       email,

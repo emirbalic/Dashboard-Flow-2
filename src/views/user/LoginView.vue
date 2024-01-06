@@ -26,6 +26,9 @@ import router from '@/router';
 
 import { save as saveToStore } from '@/localStorage';
 
+import { showNotice } from '@/visuals';
+
+
 export default defineComponent({
   // components: {
   // },
@@ -52,7 +55,15 @@ export default defineComponent({
       const response = await authenticate(body);
 
       if (response !== undefined && response.status === 401) {
-        console.warn('error logging !!!!', response)
+        // console.warn('error logging !!!!', response.data.detail)
+        showNotice({
+              props: {
+                type: 'error',
+                duration: 5000,
+                message:
+                  `${response.data.detail}`
+              },
+            });
       } else if (response !== undefined && response.status === 200) {
         console.info(' logging successfull !!!!', response.data)
         saveToStore('logged', {
