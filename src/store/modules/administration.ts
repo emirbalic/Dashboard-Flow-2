@@ -59,6 +59,10 @@ export default {
       let index = state.users.findIndex(
         (user) => user.username === payload._username
         );
+
+      // console.log(state.users);
+      // console.log(index);
+      
         
       state.users[index].username = payload.username
       state.users[index].email = payload.email
@@ -150,6 +154,7 @@ export default {
       
       return updateOwnProfile(payload)
         .then(() => {
+          // console.log(payload);
           
           commit("UPDATE_OWN_PROFILE", payload);
           return true;

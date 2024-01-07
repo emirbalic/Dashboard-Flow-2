@@ -4,7 +4,7 @@
             <div>
                 <div class="header">
                     <div class="content">
-                        <span class="title">Service properties</span>
+                        <span class="title">Order properties</span>
                         <Close_Icon class="icon" @click="closeModal()"></Close_Icon>
                     </div>
                 </div>
