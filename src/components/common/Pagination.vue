@@ -6,12 +6,12 @@
           <div> pageReady {{ pageReady }}</div>
         -->
 
-      <div> numberOfPages {{ numberOfPages }}</div>
+      <!-- <div> numberOfPages {{ numberOfPages }}</div>
       <div> currentPage {{ currentPage }}</div>
       <div> leftDistance {{ leftDistance }}</div>
       <div> rightDistance {{ rightDistance }}</div>
       <div> count {{ count }}</div>
-      <div> perPage {{ perPage }}</div>
+      <div> perPage {{ perPage }}</div> -->
 
       <div class="triple footer" :count="count">
 
@@ -343,15 +343,16 @@ export default defineComponent({
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 24px;
+    // width: 98%;
 
-    .content {
-      position: relative;
-      height: 244px;
-      width: 1fr;
-      padding: 24px;
-      box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.08);
-      border-radius: 4px;
-    }
+    // .content {
+    //   position: relative;
+    //   height: 244px;
+    //   width: 1fr;
+    //   padding: 24px;
+    //   box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.08);
+    //   border-radius: 4px;
+    // }
 
 
     .triple {
@@ -360,21 +361,19 @@ export default defineComponent({
 
 
     .footer {
-      margin: 20px 0;
+      margin: 40px 50px 0 30px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
 
-      font-family: 'Roboto';
+      font-family: "IBM Plex Sans", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
       line-height: 16px;
       color: #2d4059;
 
-      // span {
-      //   opacity: 0.6;
-      // }
+  
 
       select {
         margin-top: -10px;
@@ -407,203 +406,3 @@ export default defineComponent({
 }
 </style>
 
-
-
-
-<!-- // onBeforeMount(async () => {
-  //   let distanceInfoFromStore = await store.getters[
-  //     'orderManagement/getPaginationDistance'
-  //   ];
-  //   console.log('orderManagement/getPaginationDistance', distanceInfoFromStore);
-    
-  //   if (distanceInfoFromStore !== undefined) {
-  //     leftDistance.value = distanceInfoFromStore.leftDistance;
-  //     rightDistance.value = distanceInfoFromStore.righDistance;
-  //   }
-  // }); -->
-
-
-
-   <!-- ABOUT 100 -->
-            <!-- <span
-              class="pageList"
-              v-if="currentPage - 100 > 0"
-              @click="
-                updatePage(currentPage - 100);
-                calculateLeftDistance(currentPage);
-              "
-            >
-              ...-100
-            </span> -->
-<!-- ABOUT 100 -->
-            <!-- <span
-              class="pageList"
-              v-if="currentPage + 100 < numberOfPages"
-              @click="updatePage(currentPage + 100)"
-            >
-              ...+100
-            </span> -->
-
-
-
-
-<!-- 
-    // const calculateLeftDistance = async (page: any) => {
-      //   let current = Number(currentPage);
-      //   let pages = Number(numberOfPages.value);
-  
-      //   // console.log('calculateLeftDistance numberOfPages.value', numberOfPages.value);
-      //   // console.log('calculateLeftDistance pages', pages);
-      //   console.log('calculateLeftDistance page', page);
-        
-  
-      //   if (current <= pages) {
-      //   //   switch (current) {
-      //   //     case 1:
-      //   //       leftDistance.value = 0;
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //     case 2:
-      //   //       leftDistance.value = 1;
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //     case 3:
-      //   //       leftDistance.value = 2;
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //     case 4:
-      //   //       leftDistance.value = 3;
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //     case 5:
-      //   //       leftDistance.value = 4;
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //   }
-      //   // } else if (current > 5) {
-      //   //   leftDistance.value = 5;
-      //   //   switch (pages - current) {
-      //   //     case 1:
-      //   //       rightDistance.value = 1;
-      //   //       break;
-      //   //     case 2:
-      //   //       rightDistance.value = 2;
-      //   //       break;
-      //   //     case 3:
-      //   //       rightDistance.value = 3;
-      //   //       break;
-      //   //     case 4:
-      //   //       rightDistance.value = 4;
-      //   //       break;
-      //   //     case 5:
-      //   //       rightDistance.value = 5;
-      //   //       break;
-      //   //   }
-      //   }
-      //   // page
-      //   await setDistanceToStore();
-      // }; -->
-
-
-
-
-
-    <!-- // table {
-      //   width: 100%;
-      //   font-size: 12px;
-  
-      //   thead {
-      //     background-color: #eff4fa;
-      //     font-weight: 600;
-      //     th {
-      //       padding: 8px;
-      //     }
-      //   }
-  
-      //   tbody {
-      //     tr:nth-child(2n) {
-      //       background-color: #eff4fa;
-      //     }
-      //     td {
-      //       text-align: center;
-      //       padding: 8px;
-      //       .icon {
-      //         height: 20px;
-      //         width: 20px;
-      //         cursor: pointer;
-      //       }
-      //     }
-      //   }
-  
-        // .right {
-        //   text-align: end;
-        // }
-        // .left {
-        //   text-align: start;
-        // }
-        // .bolded {
-        //   font-weight: bold;
-        // }
-  
-      
-      // } 
-    
-    
-     // .no-shadow {
-    //   padding: 0;
-    //   box-shadow: none;
-    // }
-
-    // .double {
-    //   grid-column: span 2;
-    // }
-
-    // .twix {
-    //   display: grid;
-    //   grid-template-columns: repeat(2, minmax(0, 1fr));
-    //   grid-gap: 24px;
-    // }
-
-    // .medium {
-    //   height: 400px;
-    // }
-
-    // .large {
-    //   height: auto;
-    // }
-    
-    
-    
-    // const numberOfPages = computed(() => {
-      
-    //   let initialDistance = store.getters[
-    //     'orderManagement/getNumberOfPages'
-    //   ];
-      
-    //   rightDistance.value = initialDistance - 2
-    //   // console.log('it is here now after rightDistance', rightDistance.value);
-      
-    //   // console.log("numberOfPages ", initialDistance);
-    //   return initialDistance
-    // });
-    
-      // console.log("count in pagination ?????", props.numberOfPages);
-
-    // const pageReady = computed(() => {
-    //   return store.getters[
-    //     'orderManagement/getPageReady'
-    //   ];
-    //   // return props.numberOfPages;
-    // });
-
-    // const initialNumberOfPages = computed(() => {
-    //   return store.getters[
-    //     'orderManagement/getNumberOfPages'
-    //   ];
-    //   // return props.numberOfPages;
-    // });
-
-
-    // console.log('rightDistance >>>>>>>>>', rightDistance.value);
-    
-    -->

@@ -1,20 +1,24 @@
 <template >
   <!-- v-if="pageReady" -->
   <!-- <div class="settings-screen"> -->
-  <header>
-    <span class="title">
-      Reporting / Orders
-    </span>
+  <slot name="loader" v-if="isLoading">
+    <loader :message="'Loading orders'" :type="'large'" :color="LARGE_LOADER_COLOR"></loader>
+  </slot>
+  <slot v-else>
 
-    <button class="button is-primary" style="margin-right: 2.8rem;" @click="openCreateModal">
-      <Plus_Icon class="nav_icon" />
-      New order
-    </button>
-  </header>
+    <header>
+      <span class="title">
+        Reporting / Orders
+      </span>
+
+      <button class="button is-primary" style="margin-right: 2.8rem;" @click="openCreateModal">
+        <Plus_Icon class="nav_icon" />
+        New order
+      </button>
+    </header>
 
 
-  <!-- @click="closeDropdown" -->
-  <div class="body">
+
     <div class="filters">
       <div class="filter-wrapper">
         <p>Shipped country:</p>
@@ -67,78 +71,105 @@
       :shipped-postal-code="shippedPostalCode" @handle-edit="handleEditRecord">
     </edit-order-modal>
 
+    <div class="body">
+      <h3>System loaded {{ orders?.length }} orders</h3>
 
-    <h3>System loaded {{ orders?.length }} orders</h3>
-    
 
-    <table>
-      <thead>
-        <tr>
-          <!-- Only add icons in sorting lesson -->
-          <th @click=sortingByDate(ORDERBYID)>ID <Sorting_Icon class="sorting-icon" :class="orderBy==='id' ? 'active-sorting': ''"></Sorting_Icon></th>
-          <th @click=sortingByDate(ORDERBYDATE)>Order date<Sorting_Icon class="sorting-icon" :class="orderBy==='order_date' ? 'active-sorting': ''"></Sorting_Icon>
-          </th>
-          <th>Customer Name</th>
-          <th>Product Name</th>
-          <th>Required Date</th>
-          <!-- <th>Shipped Date</th> -->
-          <!-- <th>Shipped Via</th> -->
-          <th>Shipped Name</th>
-          <th>Shipped Address</th>
 
-          <th>Shipped Postal Code</th>
-          <th>Shipped City</th>
-          <!-- <th>Shipped Region</th> -->
-          <th>Shipped Country</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- @click="openDetails() -->
-        <tr v-for="(item, i) in orders" :key="i">
+      <!-- <td class="table-actions">
+                <div class="icon-wrapper">
 
-          <td @click=openDetails(item)>{{ item.id }}</td>
-          <td @click=openDetails(item)>{{ formatDate(item.order_date) }}</td>
-          <td @click=openDetails(item)>{{ item.customer.last_name }}</td>
-          <td @click=openDetails(item)>{{ item.product.product_name }}</td>
-          <td @click=openDetails(item)>{{ formatDate(item.required_date) }}</td>
-          <td @click=openDetails(item)>{{ item.shipped_name }}</td>
-          <td @click=openDetails(item)>{{ item.shipped_address }}</td>
-          <td @click=openDetails(item)>{{ item.shipped_postal_code }}</td>
-          <td @click=openDetails(item)>{{ item.shipped_city }}</td>
-          <td @click=openDetails(item)>{{ item.shipped_country }}</td>
-          <td>
-            <span>
+                  <Edit_Icon class="action-icon" @click="openEditModal(item.id, item.shipped_name, item.shipped_address, item.shipped_city,
+                    item.shipped_postal_code, item.shipped_country)" />
+                  <span class="tooltiptext">Edit</span>
+                </div>
+                <div class="icon-wrapper">
+                  <Trash_Icon class="action-icon" @click="() => openDeleteModal(item.id, item.id)" />
+                  <span class="tooltiptext">Delete</span>
+                </div>
+              </td> -->
+      <span>
 
-              <Edit_Icon class="table_icon" @click="openEditModal(item.id, item.shipped_name, item.shipped_address, item.shipped_city,
-                item.shipped_postal_code, item.shipped_country)" />
-            </span>
-            <span style="margin-left: .8rem;" @click="() => openDeleteModal(item.id, item.id)">
-              <Trash_Icon class="table_icon" />
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        <table>
+          <thead>
+            <tr>
+              <!-- Only add icons in sorting lesson -->
+              <th class="table-actions" @click=sortingByDate(ORDERBYID)>
+                ID 
+                <Sorting_Icon class="sorting-icon"
+                  :class="orderBy === 'id' ? 'active-sorting' : ''"/>
+              </th>
+              <th @click=sortingByDate(ORDERBYDATE)>Order date<Sorting_Icon class="sorting-icon"
+                  :class="orderBy === 'order_date' ? 'active-sorting' : ''"/>
+              </th>
+              <th>Customer Name</th>
+              <th>Product Name</th>
+              <th>Required Date</th>
+              <!-- <th>Shipped Date</th> -->
+              <!-- <th>Shipped Via</th> -->
+              <th>Shipped Name</th>
+              <th>Shipped Address</th>
 
-  {{ perPage }}
-  <!-- @reset-tab="resetTabs" -->
-  <pagination v-if="count > 0" :current-page="currentPage" :per-page="perPage" 
-    :is-tab-changed="isTabChanged" :number-of-pages="numberOfPages" :count="count" @update-page="updatePage"
-    @update-table-size="updateTableSize">
-  </pagination>
-  <div v-else class="no-records">
-    <h2>
-      No records found!
-    </h2>
-  </div>
+              <th>Shipped Postal Code</th>
+              <th>Shipped City</th>
+              <!-- <th>Shipped Region</th> -->
+              <th>Shipped Country</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- @click="openDetails() -->
+            <tr v-for="(item, i) in orders" :key="i">
+
+              <td @click=openDetails(item)>{{ item.id }}</td>
+              <td @click=openDetails(item)>{{ formatDate(item.order_date) }}</td>
+              <td @click=openDetails(item)>{{ item.customer.last_name }}</td>
+              <td @click=openDetails(item)>{{ item.product.product_name }}</td>
+              <td @click=openDetails(item)>{{ formatDate(item.required_date) }}</td>
+              <td @click=openDetails(item)>{{ item.shipped_name }}</td>
+              <td @click=openDetails(item)>{{ item.shipped_address }}</td>
+              <td @click=openDetails(item)>{{ item.shipped_postal_code }}</td>
+              <td @click=openDetails(item)>{{ item.shipped_city }}</td>
+              <td @click=openDetails(item)>{{ item.shipped_country }}</td>
+              <td class="table-actions">
+                <div class="icon-wrapper">
+
+                  <Edit_Icon class="action-icon" @click="openEditModal(item.id, item.shipped_name, item.shipped_address, item.shipped_city,
+                    item.shipped_postal_code, item.shipped_country)" />
+                  <span class="tooltiptext">Edit</span>
+                </div>
+                <div class="icon-wrapper">
+                  <Trash_Icon class="action-icon" @click="() => openDeleteModal(item.id, item.id)" />
+                  <span class="tooltiptext">Delete</span>
+                </div>
+              </td>
+
+
+
+            </tr>
+          </tbody>
+        </table>
+      </span>
+
+      <!-- {{ perPage }} -->
+      <!-- @reset-tab="resetTabs" -->
+
+      <pagination v-if="count > 0" :current-page="currentPage" :per-page="perPage" :is-tab-changed="isTabChanged"
+        :number-of-pages="numberOfPages" :count="count" @update-page="updatePage" @update-table-size="updateTableSize">
+      </pagination>
+      <div v-else class="no-records">
+        <h2>
+          No records found!
+        </h2>
+      </div>
+    </div>
+  </slot>
 </template>
 
 <script lang="ts">
-import { onBeforeMount, computed, defineComponent, onMounted, ref } from 'vue';
+import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
-// import dayjs from 'dayjs';
+import Loader from '@/components/common/Loader.vue';
 
 import { deleteRecordFromOrders, editRecordInOrders, loadOrders } from '@/api/reporting';
 
@@ -163,12 +194,15 @@ import { extractValues } from '@/composables/util'
 import { loadCountries } from '@/api/common';
 import { loadCities } from '@/api/common';
 
+import { LARGE_LOADER_COLOR } from '@/constants/colors'
 
 export default defineComponent({
   components: {
     CreateOrderModal,
     ConfirmDeleteModal,
     EditOrderModal,
+
+    Loader,
 
     Search_Icon,
     Edit_Icon,
@@ -183,6 +217,9 @@ export default defineComponent({
 
     const ORDERBYID = 'id'
     const ORDERBYDATE = 'order_date'
+
+    const isLoading = ref(false)
+
 
     let assignPage = ref();
 
@@ -395,38 +432,6 @@ export default defineComponent({
 
 
 
-    //   const rules = computed(() => {
-    //   let data = store.getters['ruleManagement/getRules'];
-    //   if (!data) return
-
-    //   // data.sort((a: any, b: any) => parseInt(a.priority) - parseInt(b.priority));
-
-    //   // data.forEach((record: IOrder) => {
-
-    //   //   switch (record.type) {
-    //   //     case "HLR_check":
-    //   //       record.type_short = "Failed HLR check";
-    //   //       break;
-    //   //     case "Number_format":
-    //   //       record.type_short = "Invalid number format";
-    //   //       break;
-    //   //     case "Number_matching":
-    //   //       record.type_short = "Number matching";
-    //   //       break;
-
-    //   //   }
-    //   // });
-
-    //   let formattedData: any[] = []
-
-    //   // data.forEach((e: any) => {
-    //   //   if (e.services.indexOf(selectedService.value) >= 0 || selectedService.value === 'all' || e.services.length === 0) {
-    //   //     formattedData.push(e)
-    //   //   }
-    //   // })
-    //   return formattedData;
-    // });
-
     // const orders = ref();
     const orders = computed(() => {
       let data = store.getters['orderManagement/getOrders'];
@@ -450,7 +455,7 @@ export default defineComponent({
       // let data: any = await loadOrders();
       // orders.value = data.results;
 
-      
+      isLoading.value = true
 
       return Promise.allSettled([
         store.dispatch('orderManagement/setOrders', {
@@ -461,19 +466,21 @@ export default defineComponent({
           page: currentPage.value,
           // add in sorting lesson
           order_by: orderBy.value
+        }).then(() => {
+          isLoading.value = false
         }),
-        
+
       ]);
     }
 
     // console.log('**************** sorting after click >>> ', orderBy.value);
-    const sortingByDate = async(ordering: string) => {
+    const sortingByDate = async (ordering: string) => {
       await store.dispatch('orderManagement/setSorting', ordering);
       orderBy.value = store.getters['orderManagement/getSorting'];
       updateList()
     };
 
-   
+
 
     const refreshList = () => {
       filteredCountry.value = '';
@@ -503,7 +510,7 @@ export default defineComponent({
     })
 
     // updateList()
-      
+
     // getNumberOfPages()
 
     // getCities()
@@ -516,6 +523,8 @@ export default defineComponent({
 
     return {
       // for sorting constants::
+
+      LARGE_LOADER_COLOR,
 
       ORDERBYID,
       ORDERBYDATE,
@@ -531,6 +540,8 @@ export default defineComponent({
 
       // maxPagesShown,
       // pagesShown,
+
+      isLoading,
 
       ENTITY_TYPE,
       entityTitle,
@@ -587,9 +598,9 @@ export default defineComponent({
 
 .sorting-icon {
 
-  vertical-align: -5px; 
+  vertical-align: -5px;
   margin-left: 5px;
-  
+
 
 }
 
@@ -599,19 +610,4 @@ export default defineComponent({
   padding-left: 2px;
 }
 
-// .attach_button {
-//     margin-left: 0px;
-//     border: none;
-//     color: white;
-//     background-color: $color-brand-1;
-//     border-radius: 0 10px 10px 0;
-//     width: 4rem;
-//     height: 3.5rem;
-
-//     &:hover {
-//         background-color: $color-brand-action-1;
-//         border-color: $color-brand-action-1;
-//         cursor: pointer;
-//     }
-// }
 </style>

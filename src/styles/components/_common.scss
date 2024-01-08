@@ -1,14 +1,14 @@
 .button {
-    // padding: 160px 240px;
-    padding: 16px 24px;
-    font-size: 20px;
+  // padding: 160px 240px;
+  // padding: 16px 24px;
+  font-size: 18px;
   background-color: transparent;
   border: 1px solid transparent;
   color: inherit;
   line-height: 1;
   border-radius: 30px;
-
- 
+  height: 50px;
+  min-width: 100px;
 
   &.is-primary {
     background-color: $color-brand-1;
@@ -53,7 +53,7 @@
     opacity: 0.6;
     &:hover {
       cursor: not-allowed;
-       // // add with UX
+      // // add with UX
       // background-color: $color-brand-1;
     }
   }
@@ -63,31 +63,30 @@
     background-color: $color-brand-action-1;
     border-color: $color-brand-action-1;
   }
-
 }
 
 // add when adding filters to the frontend
-.filters{
+.filters {
   position: relative;
   display: flex;
   flex-direction: row;
   margin: 20px;
   top: 10px;
 
-  .filter-wrapper{
+  .filter-wrapper {
     position: relative;
-    p{
+    p {
       position: absolute;
-      font-family: 'IBM Plex Sans';
+      font-family: "IBM Plex Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 14px;
       line-height: 18px;
-      color: #313F57;
+      color: #313f57;
       top: -35px;
       left: 15px;
     }
-    
+
     // input::-webkit-outer-spin-button,
     // input::-webkit-inner-spin-button {
     //     -webkit-appearance: none;
@@ -100,21 +99,21 @@
     // }
   }
   input,
-  select{
+  select {
     min-width: 260px;
     margin-right: 20px;
-    border: 1px solid #E4E3E1;
+    border: 1px solid #e4e3e1;
     border-radius: 5px;
     padding: 10px 25px 10px 15px;
     max-height: 40px;
 
-    font-family: 'IBM Plex Sans' !important;
+    font-family: "IBM Plex Sans" !important;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     // border-color: red;
-    
-    &:focus{
+
+    &:focus {
       outline: none;
     }
     // -moz-appearance: none;
@@ -127,14 +126,14 @@
   //   display: none;
   // }
 
-//   .attach_input {
-//     padding-right: 40px !important;
-//     // margin-right: 0px !important;
-//     min-width: 160px;
-//     border-radius: 5px;// 0 0 10px !important;
-//     // height: 3.5rem;
-// }
-  
+  //   .attach_input {
+  //     padding-right: 40px !important;
+  //     // margin-right: 0px !important;
+  //     min-width: 160px;
+  //     border-radius: 5px;// 0 0 10px !important;
+  //     // height: 3.5rem;
+  // }
+
   // .attach_button {
   //   margin-left: -20px;
   //   margin-right: 20px;
@@ -154,7 +153,7 @@
   //       border-color: $color-brand-action-1;
   //   }
   // }
-  
+
   .refresh_button {
     min-width: 260px;
     margin-right: 20px;
@@ -167,48 +166,45 @@
 
     &:hover {
       cursor: pointer;
-        background-color: $color-brand-action-1;
-        border-color: $color-brand-action-1;
+      background-color: $color-brand-action-1;
+      border-color: $color-brand-action-1;
     }
   }
 
-  .is-primary{
+  .is-primary {
     padding: 8px 15px !important;
   }
 }
 
-
-
-
 table {
-  width: 100%;
+  width: 98%;
   border: 1px solid #e4e3e1;
 
   thead {
     tr {
-      text-align: left;
+      text-align: center;
       background-color: #e4e3e1;
     }
     th {
-      font-family: 'IBM Plex Sans';
+      font-family: "IBM Plex Sans";
       font-weight: 700;
       font-size: 12px;
       line-height: 20px;
       padding: 6px;
     }
-    .left {
-      text-align: left;
-    }
-    .right {
-      text-align: right;
-    }
+    // .left {
+    //   text-align: left;
+    // }
+    // .right {
+    //   text-align: right;
+    // }
   }
-  .icon {
-    width: 16px;
-    height: 16px;
-  }
+  // .icon {
+  //   width: 16px;
+  //   height: 16px;
+  // }
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     width: 16px;
     height: 16px;
     accent-color: #313f57;
@@ -221,12 +217,11 @@ table {
     }
 
     td {
-      font-family: 'IBM Plex Sans';
+      font-family: "IBM Plex Sans";
       font-weight: 400;
       font-size: 12px;
       padding: 10px 8px !important;
-
-     
+      text-align: center;
     }
 
     tr:nth-child(even) {
@@ -240,8 +235,68 @@ table {
   }
 }
 
-.table_icon {
-  height: 20px;
-}
+  // it really makes a lot of sense to add this part in tooltip lesson,
+  //  all but action icon which was here before
+  .table-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+  }
+  // .table-action {
+  //   display:contents;
+  //   // flex-direction: row;
+  //   // justify-content: center;
+    
+  // }
+  .icon-wrapper {
+    position: relative;
 
+    .tooltiptext {
+      visibility: hidden;
+      width: 70px;
+      font-family: "IBM Plex Sans";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: #313f57;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 120%;
+      left: -150%;
+      // margin-left: -35px;
+    }
 
+    .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #313f57 transparent transparent transparent;
+    }
+
+    .action-icon {
+      padding: 10px 0 !important;
+      max-width: 30px !important;
+    }
+
+    .action-icon:hover + .tooltiptext {
+      visibility: visible;
+    }
+
+    // add in second example
+    .sorting-icon:hover + .tooltiptext {
+      visibility: visible;
+    }
+  }
+
+// .table_icon {
+//   height: 20px;
+// }
