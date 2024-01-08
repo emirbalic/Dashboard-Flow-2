@@ -196,6 +196,9 @@ import { loadCities } from '@/api/common';
 
 import { LARGE_LOADER_COLOR } from '@/constants/colors'
 
+import { showNotice } from '@/visuals';
+
+
 export default defineComponent({
   components: {
     CreateOrderModal,
@@ -473,10 +476,17 @@ export default defineComponent({
       ]);
     }
 
-    // console.log('**************** sorting after click >>> ', orderBy.value);
     const sortingByDate = async (ordering: string) => {
       await store.dispatch('orderManagement/setSorting', ordering);
       orderBy.value = store.getters['orderManagement/getSorting'];
+      showNotice({
+          props: {
+            type: 'success',
+            duration: 5000,
+            // message: `The user ${body.username} successfully updated`,
+            message: `Data is sorted by ${orderBy.value==='order_date' ? 'Date of order' : 'Order ID'}`,
+          },
+        });
       updateList()
     };
 
