@@ -5,7 +5,7 @@
   <div class="admin-action"  >
 
     <div class="admin-action-title">
-      <h3><b>New User Properties</b></h3>
+      <h3><b>Update your profile</b></h3>
     </div>
     <div class="admin-action-content">
 

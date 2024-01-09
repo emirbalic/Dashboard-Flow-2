@@ -151,8 +151,6 @@
         </table>
       </span>
 
-      <!-- {{ perPage }} -->
-      <!-- @reset-tab="resetTabs" -->
 
       <pagination v-if="count > 0" :current-page="currentPage" :per-page="perPage" :is-tab-changed="isTabChanged"
         :number-of-pages="numberOfPages" :count="count" @update-page="updatePage" @update-table-size="updateTableSize">
@@ -483,7 +481,6 @@ export default defineComponent({
           props: {
             type: 'success',
             duration: 5000,
-            // message: `The user ${body.username} successfully updated`,
             message: `Data is sorted by ${orderBy.value==='order_date' ? 'Date of order' : 'Order ID'}`,
           },
         });

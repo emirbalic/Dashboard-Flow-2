@@ -52,13 +52,14 @@
                     </small>
                 </strong>
             </label>
-
+            <!--  -->
             <input type="date" v-model="requiredDate" />
+            <error-message-header v-if="wrongDate" :message="ERROR_MESSAGE"></error-message-header>
             <label>
                 <strong>
                     <small>
                         Shipped Name
-
+                        
                         <span class="validation-mark">*</span>
                     </small>
                 </strong>
@@ -119,18 +120,9 @@ import { defineComponent, ref, onBeforeMount, watch, computed } from 'vue';
 import Modal from '@/components/common/Modal.vue'
 import { addNewOrder } from '@/api/reporting';
 
+import ErrorMessageHeader from '@/components/common/ErrorMessageHeader.vue';
+import { formatDate } from '@/composables/util'
 
-// import { showNotice } from '@/services/view';
-// import Loader from '@/components/common/Loader.vue';
-// import { get as getFromStore } from '@/services/store';
-
-import { loadProducts } from '@/api/reporting';
-import { loadCustomers } from '@/api/customers';
-// import Down_Icon from '@/assets/icons/Down_Icon.vue';
-
-//loadCustomers
-
-// import ErrorMessageHeader from '@/components/common/ErrorMessageHeader.vue';
 
 
 import Close_Icon from '@/assets/icons/Close_Icon.vue';
@@ -143,7 +135,7 @@ export default defineComponent({
         Close_Icon,
         // Down_Icon,
 
-        // ErrorMessageHeader,
+        ErrorMessageHeader,
         // Loader,
         Modal,
 
@@ -151,6 +143,9 @@ export default defineComponent({
     emits: ['close-modal', 'update-list'],
 
     setup(_, context) {
+
+        const ERROR_MESSAGE = 'Required date cannot be in the past!'
+        let NOW = new Date().toISOString().split('T')[0]
 
         const buttonEnable = ref(false)
 
@@ -187,20 +182,29 @@ export default defineComponent({
 
         // let newRecord: Partial<IService> = {};
 
+        const wrongDate = ref(false);
+
         const store = useStore();
 
+       
 
         watch(
-            () => [customerId.value, productId.value, requiredDate.value, shippedName.value, shippedAddress.value, shippedCity.value, shippedCountry.value, shippedPostalCode.value],
+            () => [customerId.value, productId.value, requiredDate.value, 
+                    shippedName.value, shippedAddress.value, 
+                    shippedCity.value, shippedCountry.value, shippedPostalCode.value],
             () => {
-                if (customerId.value === '' || productId.value === ''
+                if ((customerId.value === '' || productId.value === ''
                     || requiredDate.value === '' || shippedName.value === '' || shippedAddress.value === '' || shippedCity.value === ''
-                    || shippedCountry.value === '' || shippedPostalCode.value === '') {
-                    buttonEnable.value = false;
+                    || shippedCountry.value === '' || shippedPostalCode.value === '') || requiredDate.value < NOW) {
+                    buttonEnable.value = false;   
                 } else {
                     buttonEnable.value = true;
-                    //console.log('yes can!!!!!!');
-
+                }
+                if(requiredDate.value < NOW) {
+                   
+                    wrongDate.value = true;
+                } else {
+                    wrongDate.value = false;
                 }
             }
         );
@@ -239,15 +243,6 @@ export default defineComponent({
 
         const addNewRecord = () => {
 
-            // console.log("product id== ", productId.value);
-            // console.log("customer id== ", customerId.value);
-            // console.log("requiredDate id== ", requiredDate.value);
-            // console.log("shippedName id== ", shippedName.value);
-            // console.log("shippedAddress id== ", shippedAddress.value);
-            // console.log("shippedCity id== ", shippedCity.value);
-            // console.log("shippedCountry id== ", shippedCountry.value);
-            // console.log("shippedPostalCode id== ", shippedPostalCode.value);
-
             if (validateNewRecord()) {
 
                 let newOrderRecord: Partial<IOrder> = {};
@@ -259,7 +254,6 @@ export default defineComponent({
                 newOrderRecord.shippedCity = shippedCity.value;
                 newOrderRecord.shippedCountry = shippedCountry.value;
                 newOrderRecord.shippedPostalCode = shippedPostalCode.value;
-
 
                 addNewOrder(newOrderRecord).then(() => {
                     closeModal();
@@ -294,6 +288,8 @@ export default defineComponent({
 
 
         return {
+            ERROR_MESSAGE, 
+
             buttonEnable,
             customers,
             customerId,
@@ -306,6 +302,7 @@ export default defineComponent({
             shippedCity,
             shippedCountry,
             shippedPostalCode,
+            wrongDate,
 
             addNewRecord,
             closeModal,

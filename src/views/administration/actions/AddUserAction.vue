@@ -41,7 +41,7 @@
               <label for="email">Email*</label>
               <input
                 required
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 v-model.trim="email"

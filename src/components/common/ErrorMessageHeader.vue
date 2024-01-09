@@ -31,14 +31,14 @@ export default defineComponent({
     padding: 10px 15px;
     background-color: #F5DDDD;
     .icon{
-        margin-top: 2px;
+        margin-top: 18px;
     }
     p{
         margin-left: 15px;
         font-family: 'IBM Plex Sans';
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 18px;
         color: #F60C0C;
     }
 }
